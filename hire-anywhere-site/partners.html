@@ -6,7 +6,7 @@
 <title>Partner with Us — Hire Anywhere</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Unified font imports with exact variable axes matching your global brand system -->
+<!-- Balanced font weights and configurations matching the core system -->
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -83,17 +83,8 @@
     position: relative;
   }
   .nav-link:hover { color: var(--ink); }
-  .nav-link.is-active { color: var(--ink); }
-  .nav-link.is-active::after {
-    content: "";
-    position: absolute;
-    left: 0; right: 0;
-    bottom: -6px;
-    height: 1px;
-    background: var(--accent);
-  }
 
-  /* Dropdown */
+  /* Dropdown System */
   .nav-dropdown { position: relative; }
   .nav-trigger {
     background: transparent;
@@ -114,7 +105,6 @@
   .nav-trigger:hover .nav-chev,
   .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
   .nav-trigger[aria-expanded="true"] .nav-chev { transform: translateY(-1px) rotate(180deg); }
-  .nav-trigger[aria-expanded="true"] { color: var(--ink); }
 
   .nav-menu {
     position: absolute;
@@ -156,10 +146,7 @@
     transition: background 0.15s ease;
     border-left: 2px solid transparent;
   }
-  .nav-menu-item:hover {
-    background: var(--paper-deep);
-    border-left-color: var(--accent);
-  }
+  .nav-menu-item:hover { background: var(--paper-deep); border-left-color: var(--accent); }
   .nav-menu-title {
     display: block;
     font-family: 'Fraunces', serif;
@@ -179,7 +166,6 @@
     color: var(--ink-mute);
   }
 
-  /* Nav Trigger CTA Button */
   .cta {
     display: inline-block;
     background: var(--ink);
@@ -196,46 +182,40 @@
   }
   .cta:hover { background: var(--accent); border-color: var(--accent); }
 
-  /* ---------- PAGE CONTAINER WRAP ---------- */
+  /* ---------- PAGE CONTAINER LAYOUT ---------- */
   .page-wrap { max-width: 760px; margin: 0 auto; padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 3vw, 2rem); }
   
-  /* VERIFIED: Extended tracking to match Home page style perfectly */
+  /* REVERTIED: True clean tracked layout labels */
   .page-eyebrow, .stats-label { 
     font-family: 'Geist Mono', monospace; 
     font-size: 11px; 
     font-weight: 500;
-    letter-spacing: 0.22em; 
+    letter-spacing: 0.16em; 
     text-transform: uppercase; 
     color: var(--ink-mute); 
     margin-bottom: 1.5rem; 
   }
   
-  /* VERIFIED: Dialed weight down to 300 & tweaked axes to perfectly lock into Home layout lines */
+  /* FINAL FIXED H1: Set to clean 400 weight with structural SOFT setting matching the home page shot precisely */
   .page-wrap h1 { 
     font-family: var(--serif);
-    font-variation-settings: "opsz" 144, "SOFT" 20, "WONK" 0; 
-    font-size: clamp(2.6rem, 5.5vw, 4.2rem); 
-    font-weight: 300;
-    line-height: 1.05;                             
-    letter-spacing: -0.025em;                       
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; 
+    font-size: clamp(2.8rem, 6vw, 4.2rem); 
+    font-weight: 400;
+    line-height: 1.1;                             
+    letter-spacing: -0.015em;                       
     color: var(--ink);
     margin-top: 0.5rem;
-    margin-bottom: 1.75rem; 
-  }
-  
-  .page-wrap h1 em {
-    font-style: italic;
-    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
-    color: var(--accent);
+    margin-bottom: 2rem; 
   }
 
   .page-wrap h2 { 
     font-family: var(--serif); 
-    font-variation-settings: "opsz" 144, "SOFT" 40; 
-    font-size: clamp(1.6rem, 3vw, 2rem); 
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; 
+    font-size: clamp(1.8rem, 3.5vw, 2.2rem); 
     font-weight: 400; 
     color: var(--ink); 
-    letter-spacing: -0.015em;
+    letter-spacing: -0.01em;
     margin: 3.5rem 0 1rem; 
   }
   
@@ -243,7 +223,7 @@
   .page-wrap a { color: var(--accent); text-decoration: underline; transition: color 0.15s ease; }
   .page-wrap a:hover { color: var(--accent-deep); }
 
-  /* Mobile responsive grid mapping for partner program details */
+  /* Stats Panel Component Rules */
   .stats-grid { 
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
@@ -256,17 +236,17 @@
   .stats-col:first-child { padding-left: 0; }
   .stats-col:last-child { padding-right: 0; border-right: none; }
   
-  .stats-label { margin-bottom: .6rem; }
+  .stats-label { margin-bottom: .8rem; }
   
-  /* VERIFIED: Locked variable configuration for structural numeric metrics panels */
+  /* FINAL FIXED NUMBERS: Matches the elegant rounded serifs of the home page style */
   .stats-num { 
     font-family: var(--serif); 
-    font-variation-settings: "opsz" 72, "SOFT" 30; 
-    font-size: clamp(1.8rem, 3vw, 2.4rem); 
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; 
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem); 
     font-weight: 400;
     color: var(--ink); 
     line-height: 1.1; 
-    margin-top: 0.25rem;
+    margin-top: 0.15rem;
   }
   .stats-meta { font-size: .85rem; color: var(--ink-mute); margin-top: .4rem; margin-bottom: 0 !important; }
 
@@ -276,7 +256,7 @@
     .stats-col:first-child { padding-top: 1.5rem; }
   }
 
-  /* CALLOUT BLOCK ELEMENT */
+  /* Booking Container Block */
   .partner-box { margin: 2.5rem 0; padding: 2.5rem; border: 1px solid var(--rule); background: var(--paper-deep); text-align: center; }
   .partner-box-label { font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 1.25rem; }
   
@@ -295,7 +275,7 @@
   .partner-box .cta:hover { background: var(--ink); border-color: var(--ink); }
   .partner-box-meta { font-size: .8rem; color: var(--ink-mute); margin-top: 1.25rem; margin-bottom: 0 !important; }
 
-  /* ---------- Site Footer ---------- */
+  /* ---------- Footer styles ---------- */
   footer.site-footer { 
     background: #1A1D1A !important; 
     color: #C9BFA8 !important; 
@@ -311,7 +291,7 @@
   .footer-nav a, .footer-legal a { font-family: var(--sans); font-size: .85rem; color: #C9BFA8 !important; text-decoration: none; transition: color .2s; }
   .footer-nav a:hover, .footer-legal a:hover { color: #B0421C !important; }
 
-  /* Mobile Layout Adjustments */
+  /* Layout Queries Breakpoints */
   @media (max-width: 768px) {
     .nav-right { display: none !important; }
     .nav-mobile-cta { display: inline-block !important; }
@@ -336,7 +316,7 @@
 </head>
 <body>
 
-<!-- NAV COMPONENT -->
+<!-- NAVIGATION BAR -->
 <nav>
   <div class="wrap">
     <a href="index.html" class="logo"><span class="mark">§</span>Hire Anywhere</a>
@@ -359,7 +339,7 @@
   </div>
 </nav>
 
-<!-- MAIN LAYOUT CONTENT -->
+<!-- MAIN WORK AREA CONTAINER -->
 <div class="page-wrap">
   <p class="page-eyebrow">Referral Programme</p>
   <h1>Partner with us.</h1>
@@ -416,7 +396,6 @@
   </div>
 </footer>
 
-<!-- Dropdown Menu System Trigger Utility Script -->
 <script>
 (function(){
   var t=document.querySelector('.nav-trigger'), d=document.querySelector('.nav-dropdown');
