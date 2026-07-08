@@ -1652,26 +1652,20 @@ footer.site-footer {
 
 <!-- Nav -->
 <nav>
-  <div class="wrap">
-    <a href="index.html" class="logo"><span class="mark">§</span>Hire Anywhere</a>
-    <div class="nav-right">
-      <a href="success-stories.html" class="nav-link">Success stories</a>
-      <div class="nav-dropdown">
-        <button type="button" class="nav-link nav-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
-          Guides
-          <span class="nav-chev" aria-hidden="true">▾</span>
-        </button>
-        <div class="nav-menu" id="guides-menu" role="menu">
-          <a href="salary-guide.html" class="nav-menu-item" role="menuitem">
-            <span class="nav-menu-title">Salary Guide</span>
-            <span class="nav-menu-meta">UK vs Overseas · 12 roles</span>
-          </a>
-        </div>
-      </div>
-      <a href="contact.html" class="cta nav-cta-hide">Start hiring</a>
-    </div>
-      <a href="contact.html" class="nav-mobile-cta">Start hiring</a>
-  </div>
+<div class="nav-links">
+  <!-- Reverted Guides Dropdown -->
+  <li class="nav-item dropdown" style="list-style: none; display: inline-block;">
+    <a href="#" class="nav-link dropdown-toggle" id="guidesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Guides
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="guidesDropdown">
+      <li><a class="dropdown-item" href="salary-guide.html">Salary Guide</a></li>
+    </ul>
+  </li>
+  <a href="success-stories.html" class="nav-link">Success Stories</a>
+  <a href="partners.html" class="nav-link">Partner With Us</a>
+  <a href="contact.html" class="cta">Contact Us</a>
+</div>
 </nav>
 
 <!-- Hero (revised, centred) -->
