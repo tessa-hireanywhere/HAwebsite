@@ -6,8 +6,8 @@
 <title>Hire Anywhere — Find a remote role that actually fits</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Brand Fonts Included: Fraunces & Geist Mono -->
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Geist+Mono:wght@100..900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<!-- FIXED: Unified font imports with exact variable axes matching Home/Contact -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #F1EBDD;
@@ -22,7 +22,7 @@
     --max-w: 1080px;
     --gutter: clamp(1.25rem, 4vw, 2.5rem);
     --serif: 'Fraunces', Georgia, serif;
-    --sans: 'DM Sans', system-ui, sans-serif;
+    --sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif; /* FIXED: Removed DM Sans */
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,7 +31,7 @@
   body {
     background: var(--paper);
     color: var(--ink);
-    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--sans);
     font-size: 17px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -160,9 +160,6 @@
     background: var(--paper-deep);
     border-left-color: var(--accent);
   }
-  .nav-menu-item.is-active {
-    border-left-color: var(--accent);
-  }
   .nav-menu-title {
     display: block;
     font-family: 'Fraunces', serif;
@@ -182,7 +179,7 @@
     color: var(--ink-mute);
   }
 
-  /* Header CTA Button - Aligned with Contact styling */
+  /* Header CTA Button */
   .cta {
     display: inline-block;
     background: var(--ink);
@@ -194,26 +191,24 @@
     letter-spacing: 0.01em;
     transition: background 0.18s ease, border-color 0.18s ease;
     border: 1px solid var(--ink);
-    font-family: 'Geist', sans-serif;
+    font-family: var(--sans);
     cursor: pointer;
   }
   .cta:hover { background: var(--accent); border-color: var(--accent); }
 
-  /* Body Content Buttons (Burnt Orange, dark hover transition) */
+  /* FIXED: Primary Buttons now cleanly align with the global template typography rules */
   .btn-primary {
     display: inline-block;
     background: var(--accent) !important;
     color: var(--paper) !important;
-    padding: 0.8rem 1.75rem;
+    padding: 0.8rem 1.5rem;
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
     transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
     border: 1px solid var(--accent) !important;
-    font-family: 'Geist Mono', monospace;
-    text-transform: uppercase;
-    border-radius: 2px;
+    font-family: var(--sans);
     cursor: pointer;
   }
   .btn-primary:hover { 
@@ -236,16 +231,33 @@
     border-bottom: 1px solid var(--rule);
   }
   .hero-tag { display: inline-block; font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); border: 1px solid var(--rule); background: var(--paper-deep); padding: 0.35rem 0.85rem; margin-bottom: 2.5rem; }
-  h1 { font-family: var(--serif); font-size: clamp(2.6rem, 6vw, 4.5rem); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); font-weight: 400; margin-bottom: 1.75rem; }
+  
+  /* FIXED: Added explicit font-variation-settings and verified sizing rules */
+  h1 { 
+    font-family: var(--serif); 
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-size: clamp(2.4rem, 5.8vw, 4.2rem); 
+    line-height: 1.05; 
+    letter-spacing: -0.02em; 
+    color: var(--ink); 
+    font-weight: 400; 
+    margin-bottom: 1.75rem; 
+  }
+  h1 em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: var(--accent);
+  }
+
   .hero-sub { font-size: 1.15rem; color: var(--ink-soft); line-height: 1.8; max-width: 660px; margin-bottom: 3rem; }
   .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
   
-  .btn-secondary { font-family: 'Geist', sans-serif; font-size: 14px; font-weight: 500; color: var(--ink); background: transparent; border: 1px solid var(--ink); padding: 0.8rem 1.75rem; cursor: pointer; text-decoration: none; transition: border-color 0.2s, background 0.2s; }
+  .btn-secondary { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--ink); background: transparent; border: 1px solid var(--ink); padding: 0.8rem 1.5rem; cursor: pointer; text-decoration: none; transition: border-color 0.2s, background 0.2s; }
   .btn-secondary:hover { background: var(--paper-deep); }
 
   /* SYSTEM TYPOGRAPHY */
-  h2 { font-family: var(--serif); font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 400; color: var(--ink); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.25rem; }
-  h3 { font-family: 'Geist', sans-serif; font-size: 1.1rem; font-weight: 500; color: var(--ink); margin-bottom: 0.75rem; }
+  h2 { font-family: var(--serif); font-variation-settings: "opsz" 144, "SOFT" 50; font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 400; color: var(--ink); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.25rem; }
+  h3 { font-family: var(--sans); font-size: 1.1rem; font-weight: 500; color: var(--ink); margin-bottom: 0.75rem; }
   p { color: var(--ink-soft); }
 
   /* ORIGIN ELEMENT STRIP */
@@ -262,10 +274,10 @@
 
   /* PROBLEM SECTION */
   #problem { background: var(--paper-deep); border-bottom: 1px solid var(--rule); }
-  .problem-origin-note { font-size: 1rem; color: var(--ink-soft); font-style: italic; font-family: var(--serif); background: var(--paper); border-left: 3px solid var(--accent); padding: 0.85rem 1.1rem; margin-bottom: 2.5rem; max-width: 700px; line-height: 1.65; }
+  .problem-origin-note { font-size: 1rem; color: var(--ink-soft); font-style: italic; font-family: var(--serif); font-variation-settings: "opsz" 144, "SOFT" 50; background: var(--paper); border-left: 3px solid var(--accent); padding: 0.85rem 1.1rem; margin-bottom: 2.5rem; max-width: 700px; line-height: 1.65; }
   .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; border: 1px solid var(--rule); background: var(--rule); margin-bottom: 0; }
   .pain-card { background: var(--paper); padding: 2rem 1.75rem; }
-  .pain-point-title { font-family: 'Geist', sans-serif; font-size: 1.05rem; font-weight: 500; color: var(--ink); margin-bottom: 0.6rem; line-height: 1.5; }
+  .pain-point-title { font-family: var(--sans); font-size: 1.05rem; font-weight: 500; color: var(--ink); margin-bottom: 0.6rem; line-height: 1.5; }
   .pain-point-text { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.7; }
 
   /* APPROACH SECTION */
@@ -275,7 +287,7 @@
   .approach-card { border: 1px solid var(--rule); padding: 1.75rem; background: var(--paper); transition: border-color 0.2s, background 0.2s; }
   .approach-card:hover { border-color: var(--ink-mute); background: var(--paper-deep); }
   .approach-card p { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.7; }
-  .approach-closing { font-family: var(--serif); font-size: 1.2rem; color: var(--ink-soft); font-style: italic; line-height: 1.65; border-top: 1px solid var(--rule); padding-top: 2rem; margin-top: 3rem; text-align: justify; }
+  .approach-closing { font-family: var(--serif); font-variation-settings: "opsz" 144, "SOFT" 50; font-size: 1.2rem; color: var(--ink-soft); font-style: italic; line-height: 1.65; border-top: 1px solid var(--rule); padding-top: 2rem; margin-top: 3rem; text-align: justify; }
 
   /* STAY CONNECTED SECTION */
   #stay { background: var(--paper-deep); border-bottom: 1px solid var(--rule); }
@@ -288,15 +300,15 @@
   .stay-employed-note { font-size: 0.95rem; color: var(--ink-mute); border-left: 2px solid var(--rule); padding-left: 0.85rem; line-height: 1.65; font-style: italic; }
   .stay-how { padding-top: 0.5rem; }
   .stay-how-label { font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 1.25rem; }
-  .stay-how-title { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); font-weight: 400; margin-bottom: 1.25rem; line-height: 1.3; letter-spacing: -0.01em; }
+  .stay-how-title { font-family: var(--serif); font-variation-settings: "opsz" 144, "SOFT" 50; font-size: 1.3rem; color: var(--ink); font-weight: 400; margin-bottom: 1.25rem; line-height: 1.3; letter-spacing: -0.01em; }
   .stay-steps { display: flex; flex-direction: column; gap: 0; }
   .stay-step { display: flex; gap: 1.25rem; align-items: flex-start; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
   .stay-step:first-child { border-top: 1px solid var(--rule); }
-  .stay-step-num { font-family: var(--serif); font-size: 1.1rem; color: var(--accent); font-style: italic; flex-shrink: 0; padding-top: 0.05rem; min-width: 2rem; }
+  .stay-step-num { font-family: var(--serif); font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; font-size: 1.1rem; color: var(--accent); font-style: italic; flex-shrink: 0; padding-top: 0.05rem; min-width: 2rem; }
   .stay-step-title { font-size: 1rem; font-weight: 500; color: var(--ink); margin-bottom: 0.25rem; }
   .stay-step-body { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.65; }
 
-  /* ---------- Site Footer (Contact Page Spec) ---------- */
+  /* ---------- Site Footer ---------- */
   footer.site-footer { 
     background: #1A1D1A !important; 
     color: #C9BFA8 !important; 
@@ -308,7 +320,7 @@
   .footer-logo .mark { color: #B0421C; font-style: italic; }
   .footer-copy { font-family: 'Geist Mono', monospace; font-size: .75rem; letter-spacing: .08em; color: #6B6A60; margin-top: .5rem; }
   .footer-nav, .footer-legal { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; }
-  .footer-nav a, .footer-legal a { font-family: 'Geist', system-ui, sans-serif; font-size: .85rem; color: #C9BFA8 !important; text-decoration: none; transition: color .2s; }
+  .footer-nav a, .footer-legal a { font-family: var(--sans); font-size: .85rem; color: #C9BFA8 !important; text-decoration: none; transition: color .2s; }
   .footer-nav a:hover, .footer-legal a:hover { color: #B0421C !important; }
 
   /* Mobile Responsive adjustments */
@@ -322,7 +334,7 @@
   }
   .nav-mobile-cta {
     background: #1A1D1A; color: #F1EBDD;
-    font-family: 'Geist', system-ui, sans-serif;
+    font-family: var(--sans);
     font-size: .8rem; font-weight: 500;
     padding: .5rem 1rem;
     text-decoration: none; display: none;
@@ -363,7 +375,7 @@
 <section id="hero">
   <div class="container-narrow">
     <span class="hero-tag">Filipino Professionals — UK Businesses</span>
-    <h1>Find a remote role that actually fits</h1>
+    <h1>Find a remote role that actually <em>fits</em></h1>
     <p class="hero-sub">We work with professionals who are ready for the next stage in their career — not just their next job. Long-term remote roles with UK businesses that value clarity, collaboration, and genuine fit.</p>
     <div class="cta-group">
       <a href="#roles" class="btn-primary">View Open Roles</a>
