@@ -1646,6 +1646,68 @@ footer.site-footer {
   text-decoration: none; display: none;
 }
 
+/* --- NEW OVERRIDES --- */
+/* Force burnt orange text to H1 style & italic */
+.mark, em, .reason-num, .quote-mark, .step-num, .audience-item .arrow, .possible-saving-line .amount {
+    font-family: 'Fraunces', serif !important;
+    font-style: italic !important;
+    color: var(--accent) !important;
+}
+
+/* New Dark Footer Styles */
+footer.site-footer {
+    background: #1A1D1A !important;
+    color: #C9BFA8 !important;
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4rem) !important;
+    border-top: none;
+}
+.footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1.5rem 3rem;
+    max-width: 1120px;
+    margin: 0 auto;
+}
+.footer-brand { flex: 1 1 200px; }
+.footer-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    color: #F1EBDD !important;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: baseline;
+    gap: .4rem;
+}
+.footer-logo .mark {
+    color: #B0421C !important;
+    font-style: italic;
+}
+.footer-copy {
+    font-family: 'Geist Mono', monospace;
+    font-size: .75rem;
+    letter-spacing: .08em;
+    color: #6B6A60;
+    margin-top: .5rem;
+}
+.footer-nav, .footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem 1.5rem;
+}
+.footer-nav a, .footer-legal a {
+    font-family: 'Geist', system-ui, sans-serif;
+    font-size: .85rem;
+    color: #C9BFA8 !important;
+    text-decoration: none;
+    transition: color .2s;
+}
+.footer-nav a:hover, .footer-legal a:hover {
+    color: #B0421C !important;
+}
+@media(max-width:640px) {
+    .footer-inner { flex-direction: column; gap: 1.25rem; }
+}
 </style>
 </head>
 <body>
