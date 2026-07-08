@@ -1628,7 +1628,18 @@ footer, body > footer, footer.site-footer {
 }
 .footer-nav a:hover, .footer-legal a:hover { color: #B0421C !important; }
 @media(max-width:640px){ .footer-inner{flex-direction:column;gap:1.25rem;} }
+/* Fix the background mismatch to blend with footer */
+.next-step {
+  background: #1A1D1A !important;
+}
 
+/* Force correct footer logo font rendering */
+.footer-brand .logo, .footer-logo {
+  font-family: 'Fraunces', serif !important;
+  font-variation-settings: "opsz" 144, "SOFT" 30 !important;
+  font-weight: 500 !important;
+  color: #F1EBDD !important;
+}
 
 /* Mobile: show logo and CTA, hide full nav-right */
 @media (max-width: 768px) {
