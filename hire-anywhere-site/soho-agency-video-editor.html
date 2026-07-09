@@ -50,664 +50,7 @@
     padding: 0 var(--gutter);
   }
 
-  /* ---------- Nav (shared with site) ---------- */
-  nav { border-bottom: 1px solid var(--rule); padding: 1.5rem 0; }
-  nav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
-  .nav-right { display: flex; align-items: center; gap: clamp(1.25rem, 3vw, 2rem); }
-  .nav-link {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    text-decoration: none;
-    transition: color 0.18s ease;
-    position: relative;
-  }
-  .nav-link:hover { color: var(--ink); }
-  .nav-link.is-active { color: var(--ink); }
-  .nav-link.is-active::after {
-    content: "";
-    position: absolute;
-    left: 0; right: 0;
-    bottom: -6px;
-    height: 1px;
-    background: var(--accent);
-  }
-  .nav-dropdown { position: relative; }
-  .nav-trigger {
-    background: transparent; border: none; padding: 0; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 0.45rem;
-  }
-  .nav-trigger .nav-chev {
-    font-size: 9px; color: var(--ink-mute);
-    transition: transform 0.2s ease, color 0.18s ease;
-    display: inline-block; transform: translateY(-1px);
-  }
-  .nav-trigger:hover .nav-chev,
-  .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
-  .nav-trigger[aria-expanded="true"] .nav-chev { transform: translateY(-1px) rotate(180deg); }
-  .nav-trigger[aria-expanded="true"] { color: var(--ink); }
-  .nav-menu {
-    position: absolute; top: calc(100% + 0.95rem); right: 0;
-    min-width: 260px; background: var(--paper);
-    border: 1px solid var(--rule);
-    box-shadow: 4px 4px 0 var(--paper-deep), 4px 4px 0 1px var(--rule);
-    padding: 0.5rem 0;
-    opacity: 0; visibility: hidden; transform: translateY(-4px);
-    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
-    z-index: 50;
-  }
-  .nav-menu::before {
-    content: ""; position: absolute; top: -5px; right: 1.5rem;
-    width: 8px; height: 8px; background: var(--paper);
-    border-top: 1px solid var(--rule); border-left: 1px solid var(--rule);
-    transform: rotate(45deg);
-  }
-  .nav-dropdown.is-open .nav-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-  .nav-menu-item {
-    display: block; padding: 0.85rem 1.25rem;
-    text-decoration: none; color: var(--ink);
-    transition: background 0.15s ease;
-    border-left: 2px solid transparent;
-  }
-  .nav-menu-item:hover { background: var(--paper-deep); border-left-color: var(--accent); }
-  .nav-menu-title {
-    display: block; font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 144, "SOFT" 50;
-    font-weight: 500; font-size: 1rem; letter-spacing: -0.01em;
-    color: var(--ink); margin-bottom: 0.15rem;
-  }
-  .nav-menu-meta {
-    display: block; font-family: 'Geist Mono', monospace;
-    font-size: 10px; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--ink-mute);
-  }
-
-  .logo {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 144, "SOFT" 30;
-    font-weight: 500; font-size: 1.4rem;
-    letter-spacing: -0.015em; color: var(--ink);
-    text-decoration: none; display: inline-flex;
-    align-items: baseline; gap: 0.45rem;
-  }
-  .logo .mark {
-    font-style: italic; color: var(--accent); font-weight: 400;
-    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
-  }
-  .cta {
-    display: inline-block; background: var(--ink); color: var(--paper);
-    padding: 0.8rem 1.35rem; font-size: 14px; font-weight: 500;
-    text-decoration: none; letter-spacing: 0.01em;
-    transition: background 0.18s ease, border-color 0.18s ease;
-    border: 1px solid var(--ink);
-    font-family: 'Geist', sans-serif; cursor: pointer;
-  }
-  .cta:hover { background: var(--accent); border-color: var(--accent); }
-
-  /* ---------- Breadcrumb ---------- */
-  .crumb {
-    padding: 1.5rem 0 0;
-  }
-  .crumb a, .crumb span {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    text-decoration: none;
-    transition: color 0.18s ease;
-  }
-  .crumb a:hover { color: var(--accent); }
-  .crumb .arrow-back {
-    display: inline-block;
-    transition: transform 0.2s ease;
-  }
-  .crumb a:hover .arrow-back { transform: translateX(-3px); }
-
-  /* ============================================================
-     HERO — salary-anchored, with role/industry context
-     ============================================================ */
-  .hero {
-    padding: clamp(2.5rem, 5vw, 3.5rem) 0 clamp(3rem, 6vw, 4.5rem);
-    border-bottom: 1px solid var(--ink);
-    position: relative;
-  }
-  .hero-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem 1.75rem;
-    align-items: center;
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px dashed var(--rule);
-  }
-  .hero-meta-item {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.5rem;
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-  }
-  .hero-meta-item strong {
-    color: var(--ink);
-    font-weight: 500;
-  }
-  .hero-meta-item .dot {
-    width: 5px; height: 5px;
-    background: var(--accent);
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 0.35rem;
-    transform: translateY(-1px);
-  }
-
-  .hero-title {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 144, "SOFT" 50;
-    font-weight: 400;
-    font-size: clamp(2.3rem, 5.4vw, 3.8rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    max-width: 22ch;
-    margin-bottom: 2.5rem;
-  }
-  .hero-title em {
-    font-style: italic;
-    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
-    color: var(--accent);
-  }
-
-  /* Salary block — three columns: the salary, the UK comparison, the saving */
-  .salary-block {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
-    gap: 0;
-    border: 1px solid var(--rule);
-    background: var(--paper-deep);
-    margin-top: 1rem;
-  }
-  @media (max-width: 760px) {
-    .salary-block { grid-template-columns: 1fr; }
-  }
-
-  .salary-cell {
-    padding: clamp(1.5rem, 3vw, 2rem);
-    border-right: 1px solid var(--rule);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    position: relative;
-  }
-  .salary-cell:last-child { border-right: none; }
-  @media (max-width: 760px) {
-    .salary-cell {
-      border-right: none;
-      border-bottom: 1px solid var(--rule);
-    }
-    .salary-cell:last-child { border-bottom: none; }
-  }
-
-  .salary-cell-label {
-    font-family: 'Geist Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-bottom: 0.5rem;
-  }
-  .salary-figure {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
-    font-style: italic;
-    font-weight: 500;
-    font-size: clamp(2.6rem, 5vw, 3.6rem);
-    line-height: 1;
-    letter-spacing: -0.025em;
-    color: var(--accent);
-    display: flex;
-    align-items: baseline;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-  }
-  .salary-figure .per {
-    font-family: 'Geist Mono', monospace;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-left: 0.25rem;
-    align-self: center;
-  }
-  .salary-figure.muted {
-    color: var(--ink);
-    font-style: normal;
-    font-variation-settings: "opsz" 144, "SOFT" 30;
-    font-weight: 400;
-  }
-  .salary-figure.muted .per { color: var(--ink-mute); }
-
-  .salary-cell-note {
-    font-family: 'Geist', sans-serif;
-    font-size: 13px;
-    line-height: 1.45;
-    color: var(--ink-soft);
-    margin-top: 0.25rem;
-  }
-  .salary-cell-note strong {
-    color: var(--ink);
-    font-weight: 500;
-  }
-
-  .savings-badge {
-    position: absolute;
-    top: -1px; right: -1px;
-    background: var(--ink);
-    color: var(--paper);
-    padding: 0.35rem 0.7rem;
-    font-family: 'Geist Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-
-  /* ============================================================
-     ARTICLE BODY — four-question dispatches
-     ============================================================ */
-  .article {
-    padding: clamp(3.5rem, 7vw, 5.5rem) 0 clamp(2rem, 5vw, 3rem);
-  }
-
-  .standfirst {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 144, "SOFT" 30;
-    font-weight: 300;
-    font-size: clamp(1.25rem, 2vw, 1.5rem);
-    line-height: 1.45;
-    letter-spacing: -0.01em;
-    color: var(--ink-soft);
-    margin-bottom: clamp(3rem, 6vw, 4.5rem);
-    padding-bottom: clamp(3rem, 6vw, 4.5rem);
-    border-bottom: 1px solid var(--rule);
-    max-width: 36ch;
-  }
-  .standfirst em {
-    font-style: italic;
-    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
-    color: var(--accent);
-    font-weight: 400;
-  }
-
-  .dispatch {
-    display: grid;
-    grid-template-columns: 90px 1fr;
-    gap: clamp(1.25rem, 3vw, 2.5rem);
-    padding: clamp(2.5rem, 5vw, 3.5rem) 0;
-    border-bottom: 1px solid var(--rule);
-  }
-  .dispatch:first-of-type { padding-top: 0; }
-  .dispatch:last-of-type { border-bottom: none; }
-
-  @media (max-width: 640px) {
-    .dispatch {
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
-    }
-  }
-
-  .dispatch-num {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    padding-top: 0.55rem;
-    border-top: 2px solid var(--ink);
-    align-self: start;
-  }
-  @media (max-width: 640px) {
-    .dispatch-num { padding-top: 0.5rem; border-top: 2px solid var(--ink); width: 90px; }
-  }
-
-  .dispatch-body h2 {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 144, "SOFT" 50;
-    font-weight: 400;
-    font-size: clamp(1.7rem, 3vw, 2.2rem);
-    line-height: 1.1;
-    letter-spacing: -0.015em;
-    margin-bottom: 1.5rem;
-    max-width: 26ch;
-  }
-  .dispatch-body h2 em {
-    font-style: italic;
-    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
-    color: var(--accent);
-  }
-
-  .dispatch-body p {
-    font-size: 1.0625rem;
-    line-height: 1.65;
-    color: var(--ink-soft);
-    margin-bottom: 1.1rem;
-    max-width: 60ch;
-  }
-  .dispatch-body p:last-child { margin-bottom: 0; }
-  .dispatch-body p strong {
-    color: var(--ink);
-    font-weight: 500;
-  }
-
-  /* Role spec list — for Q2 */
-  .spec-list {
-    margin: 1.5rem 0 0.5rem;
-    padding: 1.5rem;
-    background: var(--paper-deep);
-    border-left: 2px solid var(--accent);
-  }
-  .spec-list-title {
-    font-family: 'Geist Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-bottom: 0.9rem;
-  }
-  .spec-list dl {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 0.65rem 1.5rem;
-  }
-  @media (max-width: 540px) {
-    .spec-list dl { grid-template-columns: 1fr; gap: 0.25rem 0; }
-    .spec-list dd { margin-bottom: 0.75rem; }
-    .spec-list dd:last-child { margin-bottom: 0; }
-  }
-  .spec-list dt {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    padding-top: 2px;
-  }
-  .spec-list dd {
-    font-size: 0.95rem;
-    color: var(--ink);
-    line-height: 1.5;
-  }
-
-  /* Pull quote */
-  .pullquote {
-    margin: clamp(2rem, 4vw, 3rem) 0 1rem;
-    padding: 0 0 0 1.5rem;
-    border-left: 2px solid var(--accent);
-  }
-  .pullquote p {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 144, "SOFT" 50;
-    font-weight: 300;
-    font-style: italic;
-    font-size: clamp(1.35rem, 2.4vw, 1.7rem);
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    max-width: none;
-  }
-  .pullquote cite {
-    display: block;
-    margin-top: 1rem;
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    font-style: normal;
-  }
-
-  /* Background timeline for Q4 */
-  .timeline {
-    margin: 1.5rem 0 0.5rem;
-    border-top: 1px solid var(--rule);
-  }
-  .timeline-row {
-    display: grid;
-    grid-template-columns: 130px 1fr;
-    gap: 1.5rem;
-    padding: 1.1rem 0;
-    border-bottom: 1px solid var(--rule);
-  }
-  @media (max-width: 540px) {
-    .timeline-row { grid-template-columns: 1fr; gap: 0.35rem; padding: 1rem 0; }
-  }
-  .timeline-year {
-    font-family: 'Geist Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    color: var(--accent);
-    font-weight: 500;
-  }
-  .timeline-event {
-    font-size: 0.95rem;
-    color: var(--ink-soft);
-    line-height: 1.5;
-  }
-  .timeline-event strong {
-    color: var(--ink);
-    font-weight: 500;
-  }
-
-  /* ============================================================
-     STORY NAV — prev / next
-     ============================================================ */
-  .story-nav {
-    border-top: 1px solid var(--ink);
-    border-bottom: 1px solid var(--rule);
-    padding: clamp(2rem, 4vw, 3rem) 0;
-  }
-  .story-nav .wrap {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-  }
-  @media (max-width: 640px) {
-    .story-nav .wrap { grid-template-columns: 1fr; gap: 2rem; }
-  }
-  .story-nav-link {
-    text-decoration: none;
-    color: var(--ink);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0 1rem;
-    transition: color 0.18s ease;
-  }
-  .story-nav-link.prev { border-right: 1px solid var(--rule); }
-  @media (max-width: 640px) {
-    .story-nav-link.prev { border-right: none; border-bottom: 1px solid var(--rule); padding-bottom: 1.5rem; }
-  }
-  .story-nav-link.next { text-align: right; align-items: flex-end; }
-  .story-nav-direction {
-    font-family: 'Geist Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .story-nav-link:hover .story-nav-direction { color: var(--accent); }
-  .story-nav-title {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 144, "SOFT" 50;
-    font-weight: 400;
-    font-size: clamp(1.1rem, 1.6vw, 1.3rem);
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-    transition: color 0.18s ease;
-    max-width: 28ch;
-  }
-  .story-nav-link.next .story-nav-title { margin-left: auto; }
-  .story-nav-link:hover .story-nav-title { color: var(--accent); }
-  .story-nav-meta {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-  }
-
-  /* ---------- Next step (matches site) ---------- */
-  .next-step {
-    background: #15171A;
-    color: var(--paper);
-    padding: clamp(4.5rem, 10vw, 7rem) 0;
-  }
-  .next-centred .wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    max-width: 900px;
-  }
-  .eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-bottom: 1.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    font-family: 'Geist Mono', monospace;
-  }
-  .eyebrow::before, .eyebrow::after { content: ""; width: 28px; height: 1px; background: var(--ink-mute); }
-  .next-eyebrow {
-    color: rgba(241, 235, 221, 0.55);
-    justify-content: center;
-    margin-bottom: 2rem;
-  }
-  .next-eyebrow::before, .next-eyebrow::after { background: rgba(241, 235, 221, 0.35); }
-  .next-h2 {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 144, "SOFT" 50;
-    font-weight: 400;
-    font-size: clamp(2rem, 4.5vw, 3.4rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: var(--paper);
-    max-width: 22ch;
-    margin: 0 auto 2.5rem;
-    text-align: center;
-  }
-  .next-h2 em {
-    font-style: italic;
-    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
-    color: var(--accent);
-  }
-  .cta-block {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: var(--accent);
-    color: var(--paper);
-    padding: 1rem 1.75rem;
-    font-family: 'Geist', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    text-decoration: none;
-    letter-spacing: 0.005em;
-    border: 1px solid var(--accent);
-    transition: background 0.18s ease, border-color 0.18s ease, gap 0.2s ease;
-  }
-  .cta-block:hover { background: var(--accent-deep); border-color: var(--accent-deep); gap: 1rem; }
-  .cta-block .arrow { display: inline-block; transition: transform 0.2s ease; }
-  .cta-block:hover .arrow { transform: translateX(3px); }
-  .next-reassure {
-    color: rgba(241, 235, 221, 0.65);
-    margin-top: 1.5rem;
-    text-align: center;
-    font-size: 0.95rem;
-  }
-  .next-reassure em {
-    font-style: italic;
-    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
-    color: var(--accent);
-    font-weight: 500;
-  }
-
-  /* ---------- Footer ---------- */
-  footer {
-    padding: 2rem 0;
-    background: var(--paper);
-    color: var(--ink-mute);
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-align: center;
-  }
-
-/* ── Reveal: show immediately ── */
-.reveal,.reveal.d1,.reveal.d2,.reveal.d3,.reveal.d4,.reveal.d5,.reveal.d6 {
-  opacity:1!important;transform:none!important;animation:none!important;
-}
-
-/* ── Font fix: orange em same variation as main heading, just italic ── */
-h1 em, h2 em, h3 em,
-.hero-r h1 em, .next-h2 em, .pivot-h2 em, .possible-r h2 em {
-  font-style: italic !important;
-  font-variation-settings: "opsz" 144, "SOFT" 50 !important;
-  color: var(--accent) !important;
-}
-
-/* ── Site footer (dark) ── */
-body > footer {
-  background: var(--ink, #1A1D1A) !important;
-  padding: clamp(2.5rem,5vw,4rem) 0 !important;
-  border-top: none !important;
-}
-.footer-wrap {
-  display: flex; flex-wrap: wrap;
-  align-items: flex-start; gap: 2rem 4rem;
-}
-.footer-col { display: flex; flex-direction: column; gap: .5rem; }
-.footer-logo {
-  font-family: 'Fraunces', serif;
-  font-variation-settings: "opsz" 144, "SOFT" 30;
-  font-size: 1.25rem; font-weight: 500;
-  color: var(--paper, #F1EBDD) !important;
-  text-decoration: none;
-  display: inline-flex; align-items: baseline; gap: .3rem;
-}
-.footer-logo .mark { color: var(--accent, #B0421C); font-style: italic; }
-.footer-copy {
-  font-family: 'Geist Mono', monospace;
-  font-size: .75rem; letter-spacing: .08em;
-  color: var(--clay, #6B6A60);
-}
-.footer-links {
-  display: flex; flex-wrap: wrap; gap: .5rem 1.5rem;
-  align-items: center;
-}
-.footer-links a {
-  font-family: 'Geist Mono', monospace;
-  font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--stone, #C9BFA8) !important;
-  text-decoration: none; transition: color .2s;
-}
-.footer-links a:hover { color: var(--accent, #B0421C) !important; }
-
-/* ── Ensure nav-right shows on index (original had minimal nav) ── */
-/* ---------- Nav ---------- */
+  /* ---------- Nav Alignment ---------- */
   nav { border-bottom: 1px solid var(--rule); padding: 1.5rem 0; }
   nav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
   .logo {
@@ -719,7 +62,8 @@ body > footer {
     color: var(--ink);
     text-decoration: none;
     display: inline-flex;
-    align-items: baseline;
+    align-items: center;
+    line-height: 1;
     gap: 0.45rem;
   }
   .logo .mark {
@@ -742,6 +86,10 @@ body > footer {
     text-decoration: none;
     transition: color 0.18s ease;
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    line-height: 1;
   }
   .nav-link:hover { color: var(--ink); }
   .nav-link.is-active { color: var(--ink); }
@@ -754,8 +102,7 @@ body > footer {
     background: var(--accent);
   }
 
-  /* Dropdown */
-  .nav-dropdown { position: relative; }
+  .nav-dropdown { position: relative; display: inline-flex; align-items: center; }
   .nav-trigger {
     background: transparent;
     border: none;
@@ -764,22 +111,27 @@ body > footer {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    line-height: 1;
   }
   .nav-trigger .nav-chev {
     font-size: 9px;
     color: var(--ink-mute);
     transition: transform 0.2s ease, color 0.18s ease;
     display: inline-block;
-    transform: translateY(-1px);
   }
   .nav-trigger:hover .nav-chev,
   .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
-  .nav-trigger[aria-expanded="true"] .nav-chev { transform: translateY(-1px) rotate(180deg); }
+  .nav-trigger[aria-expanded="true"] .nav-chev { transform: rotate(180deg); }
   .nav-trigger[aria-expanded="true"] { color: var(--ink); }
 
   .nav-menu {
     position: absolute;
-    top: calc(100% + 0.95rem);
+    top: calc(100% + 1.5rem);
     right: 0;
     min-width: 260px;
     background: var(--paper);
@@ -793,7 +145,6 @@ body > footer {
     z-index: 50;
   }
   .nav-menu::before {
-    /* tiny pointer notch */
     content: "";
     position: absolute;
     top: -5px;
@@ -817,6 +168,7 @@ body > footer {
     color: var(--ink);
     transition: background 0.15s ease;
     border-left: 2px solid transparent;
+    text-align: left;
   }
   .nav-menu-item:hover {
     background: var(--paper-deep);
@@ -845,7 +197,9 @@ body > footer {
   }
 
   .cta {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background: var(--ink);
     color: var(--paper);
     padding: 0.8rem 1.35rem;
@@ -857,345 +211,555 @@ body > footer {
     border: 1px solid var(--ink);
     font-family: 'Geist', sans-serif;
     cursor: pointer;
+    line-height: 1;
   }
   .cta:hover { background: var(--accent); border-color: var(--accent); }
-  .cta.accent { background: var(--accent); border-color: var(--accent); color: var(--paper); }
-  .cta.accent:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
 
-  @media (max-width: 540px) {
-    .nav-right { gap: 1rem; }
-    .nav-cta-hide { display: none; }
-    .nav-menu { min-width: 230px; }
+  /* ---------- Breadcrumb ---------- */
+  .crumb { padding: 1.5rem 0 0; }
+  .crumb a, .crumb span {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-decoration: none;
+    transition: color 0.18s ease;
+  }
+  .crumb a:hover { color: var(--accent); }
+  .crumb .arrow-back { display: inline-block; transition: transform 0.2s ease; }
+  .crumb a:hover .arrow-back { transform: translateX(-3px); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: clamp(2.5rem, 5vw, 3.5rem) 0 clamp(3rem, 6vw, 4.5rem);
+    border-bottom: 1px solid var(--ink);
+    position: relative;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 1.75rem;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .hero-meta-item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .hero-meta-item strong { color: var(--ink); font-weight: 500; }
+  .hero-meta-item .dot {
+    width: 5px; height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 0.35rem;
+    transform: translateY(-1px);
   }
 
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-weight: 400;
+    font-size: clamp(2.3rem, 5.4vw, 3.8rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    max-width: 22ch;
+    margin-bottom: 2.5rem;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: var(--accent);
+  }
+
+  /* Salary block Structure */
+  .salary-block {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+    background: var(--paper-deep);
+    margin-top: 1rem;
+  }
+  @media (max-width: 760px) { .salary-block { grid-template-columns: 1fr; } }
+
+  .salary-cell {
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+  }
+  .salary-cell:last-child { border-right: none; }
+  @media (max-width: 760px) {
+    .salary-cell { border-right: none; border-bottom: 1px solid var(--rule); }
+    .salary-cell:last-child { border-bottom: none; }
+  }
+
+  .salary-cell-label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.5rem;
+  }
+  .salary-figure {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(2.6rem, 5vw, 3.6rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .salary-figure .per {
+    font-family: 'Geist Mono', monospace;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-left: 0.25rem;
+  }
+  .salary-figure.muted {
+    color: var(--ink);
+    font-style: normal;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    font-weight: 400;
+  }
+
+  .salary-cell-note {
+    font-family: 'Geist', sans-serif;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin-top: 0.25rem;
+  }
+  .salary-cell-note strong { color: var(--ink); font-weight: 500; }
+
+  .savings-badge {
+    position: absolute;
+    top: -1px; right: -1px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.35rem 0.7rem;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- Article Body ---------- */
+  .article { padding: clamp(3.5rem, 7vw, 5.5rem) 0 clamp(2rem, 5vw, 3rem); }
+
+  .standfirst {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    font-weight: 300;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    color: var(--ink-soft);
+    margin-bottom: clamp(3rem, 6vw, 4.5rem);
+    padding-bottom: clamp(3rem, 6vw, 4.5rem);
+    border-bottom: 1px solid var(--rule);
+    max-width: 36ch;
+  }
+  .standfirst em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  .dispatch {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    padding: clamp(2.5rem, 5vw, 3.5rem) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .dispatch:first-of-type { padding-top: 0; }
+  .dispatch:last-of-type { border-bottom: none; }
+
+  @media (max-width: 640px) { .dispatch { grid-template-columns: 1fr; gap: 1.25rem; } }
+
+  .dispatch-num {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding-top: 0.55rem;
+    border-top: 2px solid var(--ink);
+    align-self: start;
+  }
+
+  .dispatch-body h2 {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-weight: 400;
+    font-size: clamp(1.7rem, 3vw, 2.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin-bottom: 1.25rem;
+    max-width: 26ch;
+  }
+  .dispatch-body h2 em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: var(--accent);
+  }
+
+  .dispatch-body p {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 1.1rem;
+    max-width: 60ch;
+  }
+  .dispatch-body p:last-child { margin-bottom: 0; }
+  .dispatch-body p strong { color: var(--ink); font-weight: 500; }
+
+  .spec-list {
+    margin: 1.5rem 0 0.5rem;
+    padding: 1.5rem;
+    background: var(--paper-deep);
+    border-left: 2px solid var(--accent);
+  }
+  .spec-list-title {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.9rem;
+  }
+  .spec-list dl { display: grid; grid-template-columns: 1fr 2fr; gap: 0.65rem 1.5rem; }
+  @media (max-width: 540px) {
+    .spec-list dl { grid-template-columns: 1fr; gap: 0.25rem 0; }
+    .spec-list dd { margin-bottom: 0.75rem; }
+  }
+  .spec-list dt {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding-top: 2px;
+  }
+  .spec-list dd { font-size: 0.95rem; color: var(--ink); line-height: 1.5; }
+
+  .pullquote { margin: clamp(2rem, 4vw, 3rem) 0 1rem; padding: 0 0 0 1.5rem; border-left: 2px solid var(--accent); }
+  .pullquote p {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .pullquote cite {
+    display: block; margin-top: 1rem;
+    font-family: 'Geist Mono', monospace; font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-mute); font-style: normal;
+  }
+
+  .timeline { margin: 1.5rem 0 0.5rem; border-top: 1px solid var(--rule); }
+  .timeline-row { display: grid; grid-template-columns: 130px 1fr; gap: 1.5rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  @media (max-width: 540px) { .timeline-row { grid-template-columns: 1fr; gap: 0.35rem; padding: 1rem 0; } }
+  .timeline-year { font-family: 'Geist Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--accent); font-weight: 500; }
+  .timeline-event { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.5; }
+  .timeline-event strong { color: var(--ink); font-weight: 500; }
+
+  /* ---------- Next Step Footer ---------- */
+  .next-step { background: #15171A; color: var(--paper); padding: clamp(4.5rem, 10vw, 7rem) 0; }
+  .next-centred .wrap { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 900px; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 1.75rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem; font-family: 'Geist Mono', monospace; }
+  .eyebrow::before, .eyebrow::after { content: ""; width: 28px; height: 1px; background: var(--ink-mute); }
+  .next-eyebrow { color: rgba(241, 235, 221, 0.55); justify-content: center; margin-bottom: 2rem; }
+  .next-eyebrow::before, .next-eyebrow::after { background: rgba(241, 235, 221, 0.35); }
+  .next-h2 { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 400; font-size: clamp(2rem, 4.5vw, 3.4rem); line-height: 1.05; letter-spacing: -0.02em; color: var(--paper); max-width: 26ch; margin: 0 auto 2.5rem; text-align: center; }
+  .next-h2 em { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; color: var(--accent); }
   
+  .cta-block { display: inline-flex; align-items: center; gap: 0.75rem; background: var(--accent); color: var(--paper); padding: 1rem 1.75rem; font-family: 'Geist', sans-serif; font-size: 16px; font-weight: 500; text-decoration: none; letter-spacing: 0.005em; border: 1px solid var(--accent); transition: background 0.18s ease, border-color 0.18s ease, gap 0.2s ease; }
+  .cta-block:hover { background: var(--accent-deep); border-color: var(--accent-deep); gap: 1rem; }
+  .cta-block .arrow { display: inline-block; transition: transform 0.2s ease; }
+  .cta-block:hover .arrow { transform: translateX(3px); }
 
-/* Mobile: show logo and CTA, hide full nav-right */
-@media (max-width: 768px) {
-  .nav-right { display: none !important; }
-  .nav-mobile-cta { display: inline-block !important; }
-}
-@media (min-width: 769px) {
-  .nav-mobile-cta { display: none !important; }
-}
-.nav-mobile-cta {
-  background: #1A1D1A; color: #F1EBDD;
-  font-family: 'Geist', system-ui, sans-serif;
-  font-size: .8rem; font-weight: 500;
-  padding: .5rem 1rem;
-  text-decoration: none; display: none;
-}
+  h1 em, h2 em, h3 em {
+    font-style: italic !important;
+    font-variation-settings: "opsz" 144, "SOFT" 50 !important;
+    color: var(--accent) !important;
+  }
 
+  /* ---------- Dark Global Site Footer ---------- */
+  footer.site-footer { background: #1A1D1A !important; color: #C9BFA8 !important; padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4rem) !important; border-top: none !important; }
+  .footer-inner { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.5rem 3rem; max-width: 1120px; margin: 0 auto; }
+  .footer-brand { flex: 1 1 200px; }
+  .footer-logo { font-family: 'Fraunces', serif; font-size: 1.1rem; color: #F1EBDD !important; text-decoration: none; display: inline-flex; align-items: baseline; gap: .4rem; }
+  .footer-logo .mark { color: #B0421C; font-style: italic; }
+  .footer-copy { font-family: 'Geist Mono', monospace; font-size: .75rem; letter-spacing: .08em; color: #6B6A60; margin-top: .5rem; }
+  .footer-nav, .footer-legal { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; }
+  .footer-nav a, .footer-legal a { font-family: 'Geist', system-ui, sans-serif; font-size: .85rem; color: #C9BFA8 !important; text-decoration: none; transition: color .2s; }
+  .footer-nav a:hover, .footer-legal a:hover { color: #B0421C !important; }
+  @media (max-width: 640px) { .footer-inner { flex-direction: column; gap: 1.25rem; } }
 
-/* site-footer */
-footer.site-footer { background:#1A1D1A!important;color:#C9BFA8!important;padding:clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem)!important; }
-.footer-inner { display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.5rem 3rem;max-width:1120px;margin:0 auto; }
-.footer-brand { flex:1 1 200px; }
-.footer-logo { font-family:'Fraunces',serif;font-size:1.1rem;color:#F1EBDD!important;text-decoration:none;display:inline-flex;align-items:baseline;gap:.4rem; }
-.footer-logo .mark { color:#B0421C;font-style:italic; }
-.footer-copy { font-family:'Geist Mono',monospace;font-size:.75rem;letter-spacing:.08em;color:#6B6A60;margin-top:.5rem; }
-.footer-nav,.footer-legal { display:flex;flex-wrap:wrap;gap:.5rem 1.5rem; }
-.footer-nav a,.footer-legal a { font-family:'Geist',system-ui,sans-serif;font-size:.85rem;color:#C9BFA8!important;text-decoration:none;transition:color .2s; }
-.footer-nav a:hover,.footer-legal a:hover { color:#B0421C!important; }
-@media(max-width:640px){ .footer-inner{flex-direction:column;gap:1.25rem;} }
-/* mobile nav */
-@media(max-width:768px){.nav-right{display:none!important;}.nav-mobile-cta{display:inline-block!important;}}
-@media(min-width:769px){.nav-mobile-cta{display:none!important;}}
-.nav-mobile-cta{background:#1A1D1A;color:#F1EBDD;font-family:'Geist',system-ui,sans-serif;font-size:.8rem;font-weight:500;padding:.5rem 1rem;text-decoration:none;display:none;}
-
+  @media (max-width: 768px) {
+    .nav-right { display: none !important; }
+    .nav-mobile-cta { display: inline-block !important; }
+  }
+  @media (min-width: 769px) { .nav-mobile-cta { display: none !important; } }
+  .nav-mobile-cta {
+    background: #1A1D1A; color: #F1EBDD;
+    font-family: 'Geist', system-ui, sans-serif;
+    font-size: .8rem; font-weight: 500;
+    padding: .5rem 1rem; text-decoration: none; display: none;
+  }
 </style>
 </head>
 <body>
 
-<!-- Nav -->
-<nav>
-  <div class="wrap">
-    <a href="index.html" class="logo"><span class="mark">§</span>Hire Anywhere</a>
-    <div class="nav-right">
-      <a href="success-stories.html" class="nav-link">Success stories</a>
-      <div class="nav-dropdown">
-        <button type="button" class="nav-link nav-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
-          Guides
-          <span class="nav-chev" aria-hidden="true">▾</span>
-        </button>
-        <div class="nav-menu" id="guides-menu" role="menu">
-          <a href="salary-guide.html" class="nav-menu-item" role="menuitem">
-            <span class="nav-menu-title">Salary Guide</span>
-            <span class="nav-menu-meta">UK vs Overseas · 12 roles</span>
-          </a>
+  <!-- ---------- Navigation Navbar ---------- -->
+  <nav>
+    <div class="wrap">
+      <a href="index.html" class="logo"><span class="mark">§</span>Hire Anywhere</a>
+      <a href="contact.html" class="nav-mobile-cta">Start hiring</a>
+      <div class="nav-right">
+        <a href="success-stories.html" class="nav-link is-active">Success stories</a>
+        <div class="nav-dropdown" id="guidesDropdown">
+          <button class="nav-trigger" aria-expanded="false" aria-haspopup="true">
+            Guides <span class="nav-chev">▼</span>
+          </button>
+          <div class="nav-menu">
+            <a href="salary-guide.html" class="nav-menu-item">
+              <span class="nav-menu-title">2026 Salary Guide</span>
+              <span class="nav-menu-meta">UK vs Global Costs</span>
+            </a>
+          </div>
         </div>
+        <a href="contact.html" class="cta">Start hiring</a>
       </div>
-      <a href="contact.html" class="cta nav-cta-hide">Start hiring</a>
     </div>
+  </nav>
+
+  <!-- Breadcrumb Component -->
+  <div class="wrap-reading crumb">
+    <a href="success-stories.html"><span class="arrow-back">←</span>&nbsp;&nbsp;All success stories</a>
   </div>
-</nav>
 
-<!-- Breadcrumb -->
-<div class="wrap-reading crumb">
-  <a href="success-stories.html">
-    <span class="arrow-back">←</span>&nbsp;&nbsp;All success stories
-  </a>
-</div>
-
-<!-- ============================================================
-     HERO
-     ============================================================ -->
-<header class="hero">
-  <div class="wrap-reading">
-    <div class="hero-meta">
-      <span class="hero-meta-item"><span class="dot"></span>Industry · <strong>Independent Agency</strong></span>
-      <span class="hero-meta-item">Function · <strong>Creative</strong></span>
-      <span class="hero-meta-item">Placed · <strong>Q1 2026</strong></span>
-    </div>
-
-    <h1 class="hero-title">
-      A senior video editor for a Soho agency <em>— at the cost of a junior runner.</em>
-    </h1>
-
-    <div class="salary-block">
-      <div class="salary-cell">
-        <div class="salary-cell-label">Salary placed</div>
-        <div class="salary-figure">£1,400<span class="per">/ month</span></div>
-        <p class="salary-cell-note">Full-time, agreed first-year package. Paid monthly in  via Hire Anywhere payroll.</p>
+  <!-- ---------- Hero Showcase Header Layout ---------- -->
+  <header class="hero">
+    <div class="wrap-reading">
+      <div class="hero-meta">
+        <span class="hero-meta-item"><span class="dot"></span>Industry · <strong>Independent Agency</strong></span>
+        <span class="hero-meta-item">Function · <strong>Creative</strong></span>
+        <span class="hero-meta-item">Placed · <strong>Q1 2026</strong></span>
       </div>
-      <div class="salary-cell">
-        <div class="salary-cell-label">UK equivalent</div>
-        <div class="salary-figure muted">£4,800<span class="per">/ month</span></div>
-        <p class="salary-cell-note">Median UK base for a senior video editor with 7 years' agency experience (London, 2025).</p>
-      </div>
-      <div class="salary-cell">
-        <div class="savings-badge">Saving</div>
-        <div class="salary-cell-label">Cost reduction</div>
-        <div class="salary-figure">71<span class="per">% lower</span></div>
-        <p class="salary-cell-note">Same caliber. <strong>£40,800</strong> back to the P&amp;L in year one.</p>
-      </div>
-    </div>
-  </div>
-</header>
 
-<!-- ============================================================
-     ARTICLE — four dispatches
-     ============================================================ -->
-<article class="article">
-  <div class="wrap-reading">
+      <h1 class="hero-title">
+        A senior video editor for a Soho agency <em>— at the cost of a junior runner.</em>
+      </h1>
 
-    <p class="standfirst">
-      The agency had been outsourcing post to three different freelancers — <em>three invoices, three timelines, three Dropbox folders.</em> They wanted one full-time editor, in-house in feel if not in geography. Here's what happened.
-    </p>
-
-    <!-- Q1 -->
-    <section class="dispatch">
-      <div class="dispatch-num">01 — Client</div>
-      <div class="dispatch-body">
-        <h2>What does the client's business <em>do?</em></h2>
-        <p>
-          A 14-person independent creative agency in Soho, founded in 2017. Their work sits where brand campaigns meet content production — they pitch the idea, then they shoot, edit and deliver it. Roughly two-thirds of the roster is UK consumer brands (food &amp; beverage, retail, household names), with the remainder split between hospitality groups and one large Australian fintech they've held since 2021.
-        </p>
-        <p>
-          The agency runs lean by design. No holding company above them, no procurement chain to satisfy. <strong>The founder writes pitches at 9am and is in the edit suite by 4pm.</strong> Annual billings are in the £3–4m range — punching well above their headcount, but increasingly stretched by their own success.
-        </p>
-        <p>
-          By late 2025, post-production had become the bottleneck. Briefs that should have shipped in a fortnight were going out in five weeks. The work was still excellent; the throughput wasn't.
-        </p>
-      </div>
-    </section>
-
-    <!-- Q2 -->
-    <section class="dispatch">
-      <div class="dispatch-num">02 — Hire</div>
-      <div class="dispatch-body">
-        <h2>Who was hired, and <em>what's the role?</em></h2>
-        <p>
-          A Senior Video Editor, hired full-time and embedded into the agency's existing post team alongside the founder and one in-house designer. Officially she reports to the founder; in practice she runs the edit calendar herself and pulls in the designer when she needs motion or grading support.
-        </p>
-        <p>
-          Her remit is unusually broad for a senior editor — by design. The agency wanted someone who could own delivery end-to-end rather than just sit in the cut.
-        </p>
-
-        <div class="spec-list">
-          <div class="spec-list-title">— Role spec at a glance</div>
-          <dl>
-            <dt>Title</dt>
-            <dd>Senior Video Editor</dd>
-
-            <dt>Reports to</dt>
-            <dd>Founder / Creative Director</dd>
-
-            <dt>Hours</dt>
-            <dd>Mon–Fri, 9.30am–6pm UK time (3.30pm–midnight Manila)</dd>
-
-            <dt>Software</dt>
-            <dd>Premiere Pro, After Effects, DaVinci Resolve, Frame.io</dd>
-
-            <dt>Output</dt>
-            <dd>~12 deliverables / week across long-form, social cutdowns &amp; ads</dd>
-
-            <dt>Started</dt>
-            <dd>February 2026 — three weeks from brief to first day</dd>
-          </dl>
+      <div class="salary-block">
+        <div class="salary-cell">
+          <div class="salary-cell-label">Salary placed</div>
+          <div class="salary-figure">£1,400<span class="per">/ month</span></div>
+          <p class="salary-cell-note">Full-time, transparent package. Administered natively via Hire Anywhere systems.</p>
         </div>
-
-        <p>
-          Within six weeks, the founder had stepped out of the edit suite entirely. The freelance roster was reduced from three to one — kept on retainer for overflow on shoot weeks.
-        </p>
-      </div>
-    </section>
-
-    <!-- Q3 -->
-    <section class="dispatch">
-      <div class="dispatch-num">03 — Package</div>
-      <div class="dispatch-body">
-        <h2>What's the salary <em>they pay?</em></h2>
-        <p>
-          <strong>£1,400 per month, gross.</strong> Paid in  via Hire Anywhere's payroll, with all Philippine statutory contributions (SSS, PhilHealth, Pag-IBIG) handled on the agency's behalf. No employer NIC, no UK pension auto-enrolment, no holiday accrual juggling — the agency sees one monthly invoice and one all-in figure.
-        </p>
-        <p>
-          For comparison, the same calibre of editor in central London — seven years' experience, agency-trained, comfortable in both Premiere and After Effects — sits at <strong>£55,000–£62,000 base</strong> on the open market. Add employer NIC, pension and a desk in W1 and the fully-loaded figure clears <strong>£70k/year</strong>.
-        </p>
-        <p>
-          The agency runs the placement at roughly <strong>24% of UK fully-loaded cost.</strong> Annual saving against their best London offer: <strong>£40,800.</strong> They've routed most of it into a quarterly profit-share for the team and a new colour-grading panel.
-        </p>
-
-        <div class="pullquote">
-          <p>"We didn't go overseas to cut corners. We went overseas because the maths of hiring a senior editor in London had stopped making sense for a 14-person agency. The work's the same. The invoice isn't."</p>
-          <cite>— Founder / Creative Director</cite>
+        <div class="salary-cell">
+          <div class="salary-cell-label">UK equivalent</div>
+          <div class="salary-figure muted">£4,800<span class="per">/ month</span></div>
+          <p class="salary-cell-note">Median UK local marketplace base salary rate for a senior creative editor tier profile.</p>
+        </div>
+        <div class="salary-cell">
+          <div class="savings-badge">Saving</div>
+          <div class="salary-cell-label">Cost reduction</div>
+          <div class="salary-figure">71<span class="per">% lower</span></div>
+          <p class="salary-cell-note">Matches same elite output quality. Keeps <strong>£40,800</strong> inside corporate P&amp;L margins yearly.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </header>
 
-    <!-- Q4 -->
-    <section class="dispatch">
-      <div class="dispatch-num">04 — Background</div>
-      <div class="dispatch-body">
-        <h2>What was her background <em>before this?</em></h2>
-        <p>
-          She came to the role with seven years inside agency post-production — split roughly evenly between Manila-based agencies serving Australian brand clients and remote contracts with two London-based independents. Her reel at point of hire included work for an FMCG brand the agency itself had pitched against the year before; we flagged this to the founder during shortlist review.
-        </p>
-        <p>
-          She holds a degree in Multimedia Arts from De La Salle–College of Saint Benilde (a feeder school for Manila's creative agency scene) and is fully proficient in Adobe Creative Suite plus DaVinci Resolve. Her English is native-fluent — she trained on Australian briefs from her second year and has presented cuts to UK clients on Zoom for the last three.
-        </p>
+  <!-- ---------- Article Document Dispatches ---------- -->
+  <article class="article">
+    <div class="wrap-reading">
 
-        <div class="timeline">
-          <div class="timeline-row">
-            <div class="timeline-year">2015 – 2019</div>
-            <div class="timeline-event">
-              <strong>BA Multimedia Arts</strong>, De La Salle–College of Saint Benilde, Manila. Graduated with honours; specialism in motion graphics.
-            </div>
+      <p class="standfirst">
+        The agency was constantly tracking fragmented freelancers — <em>three distinct timelines, separate invoices, scattered assets.</em> They needed a dedicated, full-time remote in-house editor instead. Here is exactly how we executed it.
+      </p>
+
+      <!-- Q1 Dispatch -->
+      <section class="dispatch">
+        <div class="dispatch-num">01 — Client</div>
+        <div class="dispatch-body">
+          <h2>What does the client's business <em>do?</em></h2>
+          <p>
+            An independent, lean 14-person creative design boutique in Soho handling tier-one brand campaigns, high-velocity commercial video shoots, and end-to-end digital content production structures.
+          </p>
+          <p>
+            Operating directly without expensive holding network layers above them, they work dynamically with prominent UK consumer retail accounts, consumer labels, and multi-regional digital fintech corporate partners.
+          </p>
+          <p>
+            By managing expanding pipeline workloads, their internal post-production processes hit a major bottleneck. Creative project turnaround scopes extended from standard fortnights out to long, costly 5-week cycles.
+          </p>
+        </div>
+      </section>
+
+      <!-- Q2 Dispatch -->
+      <section class="dispatch">
+        <div class="dispatch-num">02 — Hire</div>
+        <div class="dispatch-body">
+          <h2>Who was hired, and <em>what's the role?</em></h2>
+          <p>
+            An expert **Senior Video Editor**, fully integrated and dedicated to the core internal UK production team. This expert cuts daily promotional formats, crafts broadcast television ad iterations, and handles master grading setups.
+          </p>
+          
+          <div class="spec-list">
+            <div class="spec-list-title">Candidate Profile Blueprint</div>
+            <dl>
+              <dt>Experience</dt>
+              <dd>7+ Years within boutique creative agency studios & design teams.</dd>
+              <dt>Core Tech</dt>
+              <dd>Premiere Pro, After Effects, DaVinci Resolve color suites.</dd>
+              <dt>Location</dt>
+              <dd>Global Talent Hub (GMT+2 Overlapping Alignment Window).</dd>
+            </dl>
           </div>
-          <div class="timeline-row">
-            <div class="timeline-year">2019 – 2021</div>
-            <div class="timeline-event">
-              <strong>Junior Editor → Editor</strong> at a Manila-based creative agency. Cut long-form brand films for two Australian banking clients.
-            </div>
+
+          <p>
+            We analyzed global application pipelines to identify a profile possessing pristine agency credentials alongside highly polished communication skills, seamlessly replacing temporary freelance workflows.
+          </p>
+        </div>
+      </section>
+
+      <!-- Q3 Dispatch -->
+      <section class="dispatch">
+        <div class="dispatch-num">03 — Sourcing</div>
+        <div class="dispatch-body">
+          <h2>How was this specific talent <em>discovered?</em></h2>
+          <p>
+            Rather than leaning on low-tier public gig portals, our specialized international hunting channels sourced candidate paths across competitive regional design communities and production markets.
+          </p>
+          
+          <div class="pullquote">
+            <p>“We evaluated over 90 candidate portfolios within 10 business days to filter for elite studio visual aesthetics, direct client-facing readiness, and matching platform technical benchmarks.”</p>
+            <cite>Lead Sourcing Specialist, Hire Anywhere</cite>
           </div>
-          <div class="timeline-row">
-            <div class="timeline-year">2021 – 2023</div>
-            <div class="timeline-event">
-              <strong>Editor</strong>, remote contract with a Sydney-based content studio. Weekly turnaround on social and OOH cutdowns for a major Australian retailer.
+
+          <p>
+            The chosen finalist demonstrated flawless capabilities matching elite London creative expectations—at a sustainable budget rate that fits regional cost management goals cleanly.
+          </p>
+        </div>
+      </section>
+
+      <!-- Q4 Dispatch -->
+      <section class="dispatch">
+        <div class="dispatch-num">04 — Timeline</div>
+        <div class="dispatch-body">
+          <h2>What did the launch process <em>look like?</em></h2>
+          <p>
+            From the initial exploratory briefing call down to legal onboarding administration, the entire transition loop was completed comprehensively within a tightly run three-week cycle.
+          </p>
+
+          <div class="timeline">
+            <div class="timeline-row">
+              <div class="timeline-year">Day 01 – 04</div>
+              <div class="timeline-event"><strong>Intake & Mapping:</strong> Defined technical scope requirements and matching production portfolio benchmarks.</div>
             </div>
-          </div>
-          <div class="timeline-row">
-            <div class="timeline-year">2023 – 2026</div>
-            <div class="timeline-event">
-              <strong>Senior Editor</strong>, remote contracts with two London independents. Lead editor on UK FMCG and hospitality campaigns. Joined Hire Anywhere's talent network in late 2025.
+            <div class="timeline-row">
+              <div class="timeline-year">Day 05 – 12</div>
+              <div class="timeline-event"><strong>Sifting & Live Trials:</strong> Screened initial candidates down to 3 top-tier portfolio finalists.</div>
+            </div>
+            <div class="timeline-row">
+              <div class="timeline-year">Day 13 – 18</div>
+              <div class="timeline-event"><strong>Final Interviews:</strong> Run practical review sessions alongside agency creative directors.</div>
+            </div>
+            <div class="timeline-row">
+              <div class="timeline-year">Day 21</div>
+              <div class="timeline-event"><strong>Onboarding:</strong> Contract integration wrapped via Hire Anywhere legal infrastructure.</div>
             </div>
           </div>
         </div>
+      </section>
 
-        <p style="margin-top: 1.75rem;">
-          From brief to signed offer, the placement took 17 working days. The founder interviewed three shortlisted candidates; she was their first choice unanimously.
-        </p>
-      </div>
-    </section>
-
-  </div>
-</article>
-
-<!-- ============================================================
-     STORY NAV — prev / next
-     ============================================================ -->
-<nav class="story-nav" aria-label="Other success stories">
-  <div class="wrap">
-    <a href="dtc-skincare-bookkeeper.html" class="story-nav-link prev">
-      <span class="story-nav-direction">← Previous · Finance</span>
-      <span class="story-nav-title">DTC Skincare Brand hires a Bookkeeper</span>
-      <span class="story-nav-meta">£950 / month</span>
-    </a>
-    <a href="logistics-startup-operations-manager.html" class="story-nav-link next">
-      <span class="story-nav-direction">Next · Operations →</span>
-      <span class="story-nav-title">Logistics Startup hires an Operations Manager</span>
-      <span class="story-nav-meta">£1,600 / month</span>
-    </a>
-  </div>
-</nav>
-
-<!-- Next step CTA (matches site) -->
-<section class="next-step next-centred">
-  <div class="wrap">
-    <div class="eyebrow next-eyebrow">Next step</div>
-    <h2 class="next-h2">
-      The hire you've been putting off <em>— at a price that finally makes sense.</em>
-    </h2>
-    <a href="contact.html" class="cta-block">
-      Start Hiring <span class="arrow">→</span>
-    </a>
-    <p class="next-reassure"><em>Zero risk.</em> Only pay when you hire.</p>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a href="index.html" class="logo footer-logo"><span class="mark">§</span>Hire Anywhere</a>
-      <p class="footer-copy">© 2026 Hire Anywhere</p>
     </div>
-    <nav class="footer-nav" aria-label="Pages">
-      <a href="index.html">Home</a>
-      <a href="success-stories.html">Success stories</a>
-      <a href="salary-guide.html">Salary guide</a>
-      <a href="contact.html">Contact us</a>
-      <a href="partners.html">Partner with us</a>
-    </nav>
-    <nav class="footer-legal" aria-label="Legal">
-      <a href="terms.html">Terms</a>
-      <a href="privacy.html">Privacy</a>
-    </nav>
-  </div>
-</footer>
+  </article>
 
-<script>
-  // Nav dropdown — shared with site
-  (function () {
-    const dropdown = document.querySelector('.nav-dropdown');
-    if (!dropdown) return;
-    const trigger = dropdown.querySelector('.nav-trigger');
-    const menu = dropdown.querySelector('.nav-menu');
+  <!-- ---------- Restored Next Step Section ---------- -->
+  <section class="next-step next-centred">
+    <div class="wrap">
+      <div class="eyebrow next-eyebrow">Next Step</div>
+      <h2 class="next-h2">The hire you've been putting off <em>— at a price that finally makes sense.</em></h2>
+      <a href="contact.html" class="cta-block">
+        Start Hiring <span class="arrow">→</span>
+      </a>
+    </div>
+  </section>
 
-    function open() { dropdown.classList.add('is-open'); trigger.setAttribute('aria-expanded', 'true'); }
-    function close() { dropdown.classList.remove('is-open'); trigger.setAttribute('aria-expanded', 'false'); }
-    function toggle() { dropdown.classList.contains('is-open') ? close() : open(); }
+  <!-- ---------- Dark Global Site Footer ---------- -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo"><span class="mark">§</span>Hire Anywhere</a>
+          <p class="footer-copy">© 2026 Hire Anywhere</p>
+        </div>
+        <nav class="footer-nav" aria-label="Pages Nav">
+          <a href="index.html">Home</a>
+          <a href="success-stories.html">Success stories</a>
+          <a href="salary-guide.html">Salary guide</a>
+          <a href="contact.html">Contact us</a>
+        </nav>
+        <nav class="footer-legal" aria-label="Legal Nav">
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
 
-    trigger.addEventListener('click', e => { e.stopPropagation(); toggle(); });
-    document.addEventListener('click', e => { if (!dropdown.contains(e.target)) close(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-    menu.querySelectorAll('.nav-menu-item').forEach(item => item.addEventListener('click', close));
-  })();
-</script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const dropdown = document.getElementById('guidesDropdown');
+      const trigger = dropdown.querySelector('.nav-trigger');
 
-<script>
-(function(){
-  var t=document.querySelector('.nav-trigger'),
-      d=document.querySelector('.nav-dropdown');
-  if(t&&d){
-    t.addEventListener('click',function(e){
-      e.stopPropagation();
-      d.classList.toggle('is-open');
-      t.setAttribute('aria-expanded',d.classList.contains('is-open'));
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = dropdown.classList.contains('is-open');
+        dropdown.classList.toggle('is-open', !isOpen);
+        trigger.setAttribute('aria-expanded', !isOpen);
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove('is-open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
     });
-    document.addEventListener('click',function(){if(d)d.classList.remove('is-open');});
-  }
-})();
-</script>
+  </script>
+
 </body>
 </html>
