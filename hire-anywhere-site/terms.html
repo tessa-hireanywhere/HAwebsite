@@ -81,11 +81,14 @@
     text-decoration: none;
     transition: color 0.18s ease;
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
   }
   .nav-link:hover { color: var(--ink); }
 
   /* Dropdown System */
-  .nav-dropdown { position: relative; }
+  .nav-dropdown { position: relative; display: inline-flex; align-items: center; }
   .nav-trigger {
     background: transparent;
     border: none;
@@ -94,21 +97,21 @@
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
+    line-height: 1;
   }
   .nav-trigger .nav-chev {
     font-size: 9px;
     color: var(--ink-mute);
     transition: transform 0.2s ease, color 0.18s ease;
     display: inline-block;
-    transform: translateY(-1px);
   }
   .nav-trigger:hover .nav-chev,
   .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
-  .nav-trigger[aria-expanded="true"] .nav-chev { transform: translateY(-1px) rotate(180deg); }
+  .nav-trigger[aria-expanded="true"] .nav-chev { transform: rotate(180deg); }
 
   .nav-menu {
     position: absolute;
-    top: calc(100% + 0.95rem);
+    top: calc(100% + 1.5rem);
     right: 0;
     min-width: 260px;
     background: var(--paper);
@@ -145,6 +148,7 @@
     color: var(--ink);
     transition: background 0.15s ease;
     border-left: 2px solid transparent;
+    text-align: left;
   }
   .nav-menu-item:hover { background: var(--paper-deep); border-left-color: var(--accent); }
   .nav-menu-title {
@@ -167,7 +171,9 @@
   }
 
   .cta {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background: var(--ink);
     color: var(--paper);
     padding: 0.8rem 1.35rem;
@@ -179,6 +185,7 @@
     border: 1px solid var(--ink);
     font-family: var(--sans);
     cursor: pointer;
+    line-height: 1;
   }
   .cta:hover { background: var(--accent); border-color: var(--accent); }
 
@@ -308,8 +315,6 @@
   <p class="page-eyebrow">Legal</p>
   <h1>Terms &amp; conditions</h1>
   <p class="dateline">Last updated June 2026</p>
-  
-  <p style="border-left: 2px solid var(--accent, #B0421C); padding-left: 1.25rem; color: var(--ink-soft); font-style: italic; margin-bottom: 3rem;">Placeholder — full terms will be published before the site goes live.</p>
   
   <h2>1. Services</h2>
   <p>Hire Anywhere provides recruitment and headhunting services, placing full-time overseas professionals with UK-based businesses. Our fee is payable only on successful placement, before the candidate's start date.</p>
