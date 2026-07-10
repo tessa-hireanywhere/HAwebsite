@@ -44,7 +44,7 @@
   }
 
   /* ---------- Nav ---------- */
-  nav { border-bottom: 1px solid var(--rule); padding: 1.5rem 0; }
+  body > nav { border-bottom: 1px solid var(--rule); padding: 1.5rem 0; }
   nav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
   .logo {
     font-family: 'Fraunces', serif;
@@ -55,8 +55,7 @@
     color: var(--ink);
     text-decoration: none;
     display: inline-flex;
-    align-items: center;
-    line-height: 1;
+    align-items: baseline;
     gap: 0.45rem;
   }
   .logo .mark {
@@ -81,28 +80,28 @@
     position: relative;
     display: inline-flex;
     align-items: center;
-    height: 100%;
+    line-height: 1;
   }
   .nav-link:hover { color: var(--ink); }
-  .nav-link.is-active { color: var(--ink); }
-  .nav-link.is-active::after {
-    content: "";
-    position: absolute;
-    left: 0; right: 0;
-    bottom: -6px;
-    height: 1px;
-    background: var(--accent);
-  }
 
   /* Dropdown */
-  .nav-dropdown { position: relative; display: inline-flex; align-items: center; }
+  .nav-dropdown { position: relative; }
   .nav-trigger {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     background: transparent;
     border: none;
+    outline: none;
     padding: 0;
+    margin: 0;
+    height: auto;
+    min-height: 0;
+    box-sizing: content-box;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
+    vertical-align: middle;
     gap: 0.45rem;
     font-family: 'Geist Mono', monospace;
     font-size: 11px;
@@ -116,15 +115,15 @@
     color: var(--ink-mute);
     transition: transform 0.2s ease, color 0.18s ease;
     display: inline-block;
+    transform: translateY(-1px);
   }
   .nav-trigger:hover .nav-chev,
   .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
-  .nav-trigger[aria-expanded="true"] .nav-chev { transform: rotate(180deg); }
+  .nav-trigger[aria-expanded="true"] .nav-chev { transform: translateY(-1px) rotate(180deg); }
   .nav-trigger[aria-expanded="true"] { color: var(--ink); }
-
   .nav-menu {
     position: absolute;
-    top: calc(100% + 1.5rem);
+    top: calc(100% + 0.95rem);
     right: 0;
     min-width: 260px;
     background: var(--paper);
@@ -161,7 +160,6 @@
     color: var(--ink);
     transition: background 0.15s ease;
     border-left: 2px solid transparent;
-    text-align: left;
   }
   .nav-menu-item:hover {
     background: var(--paper-deep);
@@ -190,9 +188,7 @@
   }
 
   .cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-block;
     background: var(--ink);
     color: var(--paper);
     padding: 0.8rem 1.35rem;
@@ -204,7 +200,6 @@
     border: 1px solid var(--ink);
     font-family: 'Geist', sans-serif;
     cursor: pointer;
-    line-height: 1;
   }
   .cta:hover { background: var(--accent); border-color: var(--accent); }
   .cta.accent { background: var(--accent); border-color: var(--accent); color: var(--paper); }
@@ -216,7 +211,7 @@
     .nav-menu { min-width: 230px; }
   }
 
-  /* ---------- Page header ---------- */
+  /* ---------- Page header (centred, mirrors landing hero) ---------- */
   .page-head {
     padding: clamp(3.5rem, 8vw, 5.5rem) 0 clamp(2rem, 4vw, 2.5rem);
   }
@@ -272,117 +267,56 @@
     text-align: center;
   }
 
-  /* ---------- Main layout ---------- */
+  /* ---------- Main layout: form (left) + cover (right) ---------- */
   .guide-wrap {
     padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(3.5rem, 7vw, 5rem);
   }
   .guide-stack {
-    max-width: 860px;
+    max-width: 760px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 340px;
-    align-items: start;
+    grid-template-columns: 1fr auto;
+    align-items: center;
     gap: clamp(2rem, 5vw, 3.5rem);
   }
+  .guide-stack .form-card { order: 1; }
+  .guide-stack .cover-placeholder { order: 2; }
 
-  @media (max-width: 768px) {
+  @media (max-width: 680px) {
     .guide-stack {
+      max-width: 440px;
       grid-template-columns: 1fr;
-      gap: 3rem;
+      gap: 2rem;
       justify-items: center;
     }
+    .guide-stack .form-card { order: 2; width: 100%; }
+    .guide-stack .cover-placeholder { order: 1; }
   }
 
-  /* ----- New Exact Match Card Thumbnail Design ----- */
+  /* Cover mock — same treatment as the salary-guide teaser on the homepage */
   .cover-placeholder {
-    width: 100%;
-    max-width: 340px;
-    background: #F1EBDD;
-    border: 1px solid var(--rule);
-    padding: 2.25rem 2rem;
-    text-align: left;
-    box-shadow: none;
+    width: 260px;
+    flex-shrink: 0;
   }
+  @media (max-width: 680px) { .cover-placeholder { width: 220px; } }
   .guide-mock {
-    transform: none !important;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    box-shadow: 5px 5px 0 var(--paper-deep), 5px 5px 0 1px var(--rule);
+    position: relative;
   }
-  .guide-mock .logo-row {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    margin-bottom: 0.25rem;
-  }
-  .guide-mock .logo-row .mark {
-    font-family: 'Fraunces', serif;
-    color: var(--accent);
-    font-style: italic;
-    font-size: 1.05rem;
-    font-weight: 400;
-  }
-  .guide-mock .logo-row .name {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: 0.95rem;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-  }
-  .guide-mock .edition {
-    font-family: 'Geist Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-bottom: 1.5rem;
-  }
-  .guide-mock .title {
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-size: 1.65rem;
-    line-height: 1.2;
-    letter-spacing: -0.015em;
-    color: var(--ink);
-    margin-bottom: 1.5rem;
-  }
-  .guide-mock .section-label {
-    font-family: 'Geist Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-bottom: 1rem;
-    display: block;
-  }
-  .guide-mock .mock-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .guide-mock .mock-list li {
-    font-family: 'Geist', sans-serif;
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-    padding: 0.35rem 0;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .guide-mock .mock-list li::before {
-    content: "—";
-    color: var(--rule);
-    font-weight: 300;
-  }
-  .guide-mock .footer-strip {
-    margin-top: 2rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--rule);
-    font-family: 'Geist Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    display: flex;
-    justify-content: space-between;
-  }
+  .guide-mock .logo-row { display: flex; align-items: baseline; gap: 0.4rem; margin-bottom: 0.2rem; }
+  .guide-mock .logo-row .mark { font-family: 'Fraunces', serif; color: var(--accent); font-style: italic; font-size: 1rem; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .guide-mock .logo-row .name { font-family: 'Fraunces', serif; font-weight: 500; font-size: 0.92rem; letter-spacing: -0.01em; }
+  .guide-mock .edition { font-family: 'Geist Mono', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 1.1rem; }
+  .guide-mock .title { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 400; font-size: 1.2rem; line-height: 1.12; letter-spacing: -0.012em; margin-bottom: 1.1rem; }
+  .guide-mock .inside-label { font-family: 'Geist Mono', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 0.65rem; }
+  .guide-mock ul { list-style: none; margin-bottom: 1.1rem; }
+  .guide-mock ul li { font-family: 'Fraunces', serif; font-size: 0.85rem; line-height: 1.65; color: var(--ink); display: flex; gap: 0.4rem; }
+  .guide-mock ul li::before { content: "\2014"; color: var(--ink); }
+  .guide-mock ul li.more { font-style: italic; color: var(--ink-mute); font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .guide-mock .footer-strip { font-family: 'Geist Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); padding-top: 1rem; border-top: 1px solid var(--rule); }
 
   /* ----- Form card ----- */
   .form-card {
@@ -391,7 +325,6 @@
     padding: clamp(1.75rem, 4vw, 2.5rem);
     position: relative;
     text-align: center;
-    width: 100%;
   }
   .form-eyebrow {
     font-family: 'Geist Mono', monospace;
@@ -418,13 +351,6 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
     color: var(--accent);
   }
-  .form-card p.intro {
-    color: var(--ink-soft);
-    font-size: 1rem;
-    line-height: 1.55;
-    margin-bottom: 1.75rem;
-    max-width: 42ch;
-  }
 
   form { display: block; text-align: left; }
   .field { margin-bottom: 1.25rem; }
@@ -437,13 +363,8 @@
     color: var(--ink-soft);
     margin-bottom: 0.55rem;
   }
-  label .req {
-    color: var(--accent);
-    margin-left: 0.2rem;
-  }
-  input[type="text"],
-  input[type="email"],
-  select {
+  label .req { color: var(--accent); margin-left: 0.2rem; }
+  input[type="text"], input[type="email"], select {
     width: 100%;
     background: var(--input);
     border: 1px solid var(--rule);
@@ -458,24 +379,22 @@
     border-radius: 0;
   }
   input:hover, select:hover { border-color: var(--ink-mute); }
-  input:focus, select:focus {
-    outline: none;
-    border-color: var(--accent);
-    background: #FFFFFF;
-  }
+  input:focus, select:focus { outline: none; border-color: var(--accent); background: #FFFFFF; }
   input::placeholder { color: var(--ink-mute); opacity: 0.6; }
 
-  .submit-row {
-    margin-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
+  .field-error {
+    display: none;
+    margin-top: 0.45rem;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--accent);
   }
-  .submit-row .cta {
-    padding: 0.95rem 1.5rem;
-    width: 100%;
-    text-align: center;
-  }
+  .field.has-error input { border-color: var(--accent); }
+  .field.has-error .field-error { display: block; }
+
+  .submit-row { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.85rem; }
+  .submit-row .cta { padding: 0.95rem 1.5rem; width: 100%; text-align: center; }
   .submit-fineprint {
     font-family: 'Geist Mono', monospace;
     font-size: 11px;
@@ -484,18 +403,15 @@
     color: var(--ink-mute);
     text-align: center;
   }
+  .submit-fineprint strong { color: var(--accent); font-weight: 500; }
 
-  /* Success state */
-  .form-success {
-    display: none;
-    padding: 1rem 0 0.5rem;
-    text-align: center;
-  }
+  .form-success { display: none; padding: 1rem 0 0.5rem; text-align: center; }
   .form-success.is-visible { display: block; }
   .form-card form.is-hidden { display: none; }
   .success-mark {
     font-family: 'Fraunces', serif;
     font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
     color: var(--accent);
     font-size: 2.5rem;
     line-height: 1;
@@ -503,18 +419,19 @@
   }
   .success-title {
     font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
     font-weight: 400;
     font-size: clamp(1.35rem, 2.2vw, 1.7rem);
     letter-spacing: -0.015em;
     margin-bottom: 0.75rem;
     line-height: 1.15;
   }
-  .success-body {
-    color: var(--ink-soft);
-    max-width: 38ch;
-    margin: 0 auto 1.25rem;
-    font-size: 0.98rem;
+  .success-title em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: var(--accent);
   }
+  .success-body { color: var(--ink-soft); max-width: 38ch; margin: 0 auto 1.25rem; font-size: 0.98rem; }
   .success-meta {
     font-family: 'Geist Mono', monospace;
     font-size: 11px;
@@ -528,29 +445,7 @@
   }
 
   /* ---------- Section base ---------- */
-  section.standard {
-    padding: clamp(3.5rem, 8vw, 5.5rem) 0;
-    border-top: 1px solid var(--rule);
-  }
-  .section-eyebrow {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--rule);
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  .section-eyebrow::before {
-    content: "";
-    width: 28px;
-    height: 1px;
-    background: var(--ink-mute);
-  }
+  section.standard { padding: clamp(3.5rem, 8vw, 5.5rem) 0; border-top: 1px solid var(--rule); }
   h2 {
     font-family: 'Fraunces', serif;
     font-variation-settings: "opsz" 144, "SOFT" 50;
@@ -561,516 +456,193 @@
     margin-bottom: 1.5rem;
     max-width: 22ch;
   }
-  h2 em {
-    font-style: italic;
-    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
-    color: var(--accent);
-  }
-
-  /* ---------- Inside (3-col) ---------- */
-  #inside { background: var(--paper-deep); }
-  .inside-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1.5rem, 3vw, 2.5rem);
-    margin-top: 0.5rem;
-  }
-  @media (max-width: 760px) { .inside-grid { grid-template-columns: 1fr; gap: 2.25rem; } }
-
-  .inside-col {
-    border-top: 1px solid var(--rule);
-    padding-top: 1.5rem;
-  }
-  .inside-num {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1rem;
-  }
-  .inside-col h3 {
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-size: 1.3rem;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    margin-bottom: 0.85rem;
-  }
-  .inside-col p {
-    color: var(--ink-soft);
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 1.1rem;
-  }
-  .inside-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .inside-list li {
-    font-family: 'Fraunces', serif;
-    font-size: 1.02rem;
-    line-height: 1.65;
-    color: var(--ink);
-    display: flex;
-    gap: 0.6rem;
-  }
-  .inside-list li::before {
-    content: "—";
-    color: var(--accent);
-    font-style: italic;
-    flex-shrink: 0;
-  }
-
-  /* ---------- Pull quote ---------- */
-  .pullquote-wrap {
-    text-align: center;
-    max-width: 760px;
-    margin: 0 auto;
-  }
-  .pullquote-mark {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    color: var(--accent);
-    font-size: 3rem;
-    line-height: 1;
-    margin-bottom: 1rem;
-  }
-  .pullquote {
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-size: clamp(1.4rem, 2.6vw, 1.85rem);
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 1.5rem;
-  }
-  .pullquote-attrib {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-  }
-  .pullquote-attrib::before {
-    content: "— ";
-    color: var(--accent);
-  }
-
-  /* ---------- FAQ ---------- */
-  #faq { background: var(--paper-deep); }
-  .faq-head {
-    text-align: center;
-    margin-bottom: 2.5rem;
-    max-width: 680px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .faq-head h2 {
-    margin: 0 auto 0.75rem;
-    max-width: 24ch;
-    text-align: center;
-  }
-  .faq-list {
-    max-width: 760px;
-    margin: 0 auto;
-    border-top: 1px solid var(--rule);
-  }
-  .faq-item {
-    border-bottom: 1px solid var(--rule);
-  }
-  .faq-q {
-    width: 100%;
-    text-align: left;
-    background: transparent;
-    border: none;
-    padding: 1.5rem 0;
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-size: clamp(1.05rem, 1.6vw, 1.2rem);
-    line-height: 1.35;
-    color: var(--ink);
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1.5rem;
-    letter-spacing: -0.01em;
-  }
-  .faq-q:hover { color: var(--accent); }
-  .faq-icon {
-    font-family: 'Geist Mono', monospace;
-    color: var(--accent);
-    font-size: 1.1rem;
-    flex-shrink: 0;
-    transition: transform 0.25s ease;
-  }
-  .faq-item.is-open .faq-icon { transform: rotate(45deg); }
-  .faq-a {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-  .faq-item.is-open .faq-a { max-height: 400px; }
-  .faq-a-inner {
-    padding: 0 0 1.5rem;
-    color: var(--ink-soft);
-    font-size: 1rem;
-    line-height: 1.65;
-    max-width: 65ch;
-  }
+  h2 em { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; color: var(--accent); }
 
   /* ---------- Next step ---------- */
-  .next-step {
-    text-align: center;
-    padding: clamp(4rem, 9vw, 6rem) 0;
-    border-top: 1px solid var(--rule);
-  }
+  .next-step { text-align: center; padding: clamp(4rem, 9vw, 6rem) 0; border-top: 1px solid var(--rule); }
   .next-step .eyebrow { justify-content: center; }
-  .next-step h2 {
-    margin: 0 auto 2rem;
-    max-width: 24ch;
-    text-align: center;
-    font-size: clamp(1.7rem, 3.2vw, 2.3rem);
-  }
-  .next-reassure {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-top: 1.1rem;
-  }
-  .next-reassure em {
-    font-style: normal;
-    color: var(--accent);
-  }
+  .next-step h2 { margin: 0 auto 2rem; max-width: 24ch; text-align: center; font-size: clamp(1.7rem, 3.2vw, 2.3rem); }
+  .next-reassure { font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); margin-top: 1.1rem; }
+  .next-reassure em { font-style: normal; color: var(--accent); }
 
-  /* ---------- Grain overlayer ---------- */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.025;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  }
-
-  h1 em, h2 em, h3 em {
-    font-style: italic !important;
-    font-variation-settings: "opsz" 144, "SOFT" 50 !important;
-    color: var(--accent) !important;
-  }
-
-  @media (max-width: 768px) {
-    .nav-right { display: none !important; }
-    .nav-mobile-cta { display: inline-block !important; }
-  }
-  @media (min-width: 769px) {
-    .nav-mobile-cta { display: none !important; }
-  }
-  .nav-mobile-cta {
-    background: #1A1D1A; color: #F1EBDD;
-    font-family: 'Geist', system-ui, sans-serif;
-    font-size: .8rem; font-weight: 500;
-    padding: .5rem 1rem;
-    text-decoration: none; display: none;
-  }
-
-  /* ── Site Footer ── */
-  footer.site-footer { 
-    background: #1A1D1A !important; 
-    color: #C9BFA8 !important; 
-    padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem) !important; 
-  }
-  .footer-inner { 
-    display: flex; 
-    flex-wrap: wrap; 
-    align-items: flex-start; 
-    gap: 1.5rem 3rem; 
-    max-width: 1120px; 
-    margin: 0 auto; 
-  }
+  /* ---------- Footer ---------- */
+  footer.site-footer { background: var(--ink) !important; color: #C9BFA8 !important; padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem) !important; border-top: none; }
+  .footer-inner { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.75rem 3rem; max-width: 1120px; margin: 0 auto; }
   .footer-brand { flex: 1 1 200px; }
-  .footer-logo { 
-    font-family: 'Fraunces', serif; 
-    font-size: 1.1rem; 
-    color: #F1EBDD !important; 
-    text-decoration: none; 
-    display: inline-flex; 
-    align-items: baseline; 
-    gap: .4rem; 
-  }
-  .footer-logo .mark { color: #B0421C; font-style: italic; }
-  .footer-copy { 
-    font-family: 'Geist Mono', monospace; 
-    font-size: .75rem; 
-    letter-spacing: .08em; 
-    color: #6B6A60; 
-    margin-top: .5rem; 
-  }
-  .footer-nav, .footer-legal { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; }
-  .footer-nav a, .footer-legal a { 
-    font-family: 'Geist', system-ui, sans-serif; 
-    font-size: .85rem; 
-    color: #C9BFA8 !important; 
-    text-decoration: none; 
-    transition: color 0.2s;
-  }
-  .footer-nav a:hover, .footer-legal a:hover { color: #B0421C !important; }
+  .footer-logo { font-family: 'Fraunces', serif; font-size: 1.1rem; color: #F1EBDD !important; text-decoration: none; display: inline-flex; align-items: baseline; gap: .4rem; }
+  .footer-logo .mark { color: var(--accent); font-style: italic; }
+  .footer-copy { font-family: 'Geist Mono', monospace; font-size: .75rem; letter-spacing: .08em; color: #6B6A60; margin-top: .5rem; }
+  .footer-nav, .footer-legal { display: flex; flex-wrap: wrap; gap: .6rem 1.75rem; align-items: center; }
+  .footer-nav { flex: 2 1 380px; }
+  .footer-nav a, .footer-legal a { font-family: 'Geist', system-ui, sans-serif; font-size: .85rem; color: #C9BFA8 !important; text-decoration: none; transition: color .2s; }
+  .footer-nav a:hover, .footer-legal a:hover { color: var(--accent) !important; }
+  @media (max-width: 640px) { .footer-inner { flex-direction: column; gap: 1.25rem; } }
 </style>
 </head>
 <body>
 
-  <!-- ---------- Nav Section ---------- -->
-  <nav>
-    <div class="wrap">
-      <a href="index.html" class="logo"><span class="mark">§</span>Hire Anywhere</a>
-      <a href="contact.html" class="nav-mobile-cta">Start hiring</a>
-      <div class="nav-right">
-        <a href="success-stories.html" class="nav-link">Success stories</a>
-        <div class="nav-dropdown" id="guidesDropdown">
-          <button class="nav-trigger" aria-expanded="false" aria-haspopup="true">
-            Guides <span class="nav-chev">▼</span>
-          </button>
-          <div class="nav-menu">
-            <a href="salary-guide.html" class="nav-menu-item is-active">
-              <span class="nav-menu-title">2026 Salary Guide</span>
-              <span class="nav-menu-meta">UK vs Global Costs</span>
-            </a>
-          </div>
-        </div>
-        <a href="contact.html" class="cta">Start hiring</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- ---------- Page Header ---------- -->
-  <header class="page-head">
-    <div class="wrap">
-      <div class="eyebrow">The Salary Guide</div>
-      <h1>The Salary Guide for <em>hiring remote staff</em> overseas.</h1>
-      <p class="lede">Twelve roles. UK salaries versus fully-loaded overseas equivalents. Eighteen pages of figures, drawn from our own placements over the past twelve months.</p>
-    </div>
-  </header>
-
-  <!-- ---------- Grid Content Area ---------- -->
-  <main class="guide-wrap">
-    <div class="wrap guide-stack">
-      
-      <!-- Input Card Panel -->
-      <div class="form-card">
-        <div class="form-eyebrow">Download — Page, PDF</div>
-        <h2>Sent straight to your <em>inbox.</em></h2>
-        <p class="intro">Fill out your business requirements below to receive your customized financial framework analysis copy instantly.</p>
-        
-        <form action="#" method="POST" id="salaryForm">
-          <div class="field">
-            <label for="name">Your name <span class="req">*</span></label>
-            <input type="text" id="name" name="name" placeholder="e.g. Alex" required />
-          </div>
-          <div class="field">
-            <label for="email">Work email <span class="req">*</span></label>
-            <input type="email" id="email" name="email" placeholder="alex@company.com" required />
-          </div>
-          <div class="submit-row">
-            <button type="submit" class="cta accent">Send me the guide</button>
-            <p class="submit-fineprint">No spam. Unsubscribe in **one click.**</p>
-          </div>
-        </form>
-
-        <div class="form-success" id="successState">
-          <div class="success-mark">✓</div>
-          <h3 class="success-title">Check your <em>inbox.</em></h3>
-          <p class="success-body">We've dispatched the 2026 Benchmark Matrix layout overview dataset straight over to your work account portal.</p>
-          <div class="success-meta">Sent via automated delivery pipeline</div>
+<!-- Nav -->
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="mark">§</span>Hire Anywhere</a>
+    <div class="nav-right">
+      <a href="success-stories.html" class="nav-link">Success stories</a>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-link nav-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
+          Guides
+          <span class="nav-chev" aria-hidden="true">▾</span>
+        </button>
+        <div class="nav-menu" id="guides-menu" role="menu">
+          <a href="salary-guide.html" class="nav-menu-item is-active" role="menuitem">
+            <span class="nav-menu-title">Salary Guide</span>
+            <span class="nav-menu-meta">UK vs Overseas · 12 roles</span>
+          </a>
         </div>
       </div>
+      <a href="contact.html" class="cta nav-cta-hide">Start hiring</a>
+    </div>
+  </div>
+</nav>
 
-      <!-- Preview Panel Graphic Container (Matches Screenshot 2 Template Layout exactly) -->
-      <div class="cover-placeholder">
+<!-- Page header -->
+<section class="page-head">
+  <div class="wrap">
+    <div class="eyebrow">The Salary Guide</div>
+    <h1>The Salary Guide for <em>hiring remote staff overseas.</em></h1>
+    <p class="lede">Twelve roles. UK salaries versus fully-loaded overseas equivalents. Eighteen pages of figures, drawn from our own placements over the past twelve months.</p>
+  </div>
+</section>
+
+<!-- Cover + Form -->
+<div class="guide-wrap">
+  <div class="wrap">
+    <div class="guide-stack">
+      <div class="cover-placeholder" aria-hidden="true">
         <div class="guide-mock">
-          <div class="logo-row"><span class="mark">§</span><span class="name">Hire Anywhere</span></div>
+          <div class="logo-row">
+            <span class="mark">§</span>
+            <span class="name">Hire Anywhere</span>
+          </div>
           <div class="edition">2026 Edition</div>
           <div class="title">The Salary Comparison Guide</div>
-          <span class="section-label">Inside</span>
-          <ul class="mock-list">
+          <div class="inside-label">Inside</div>
+          <ul>
             <li>Bookkeeper</li>
             <li>Executive Assistant</li>
             <li>Customer service lead</li>
             <li>Operations admin</li>
             <li>Marketing executive</li>
-            <li>Seven more roles</li>
+            <li class="more">Seven more roles</li>
           </ul>
-          <div class="footer-strip">
-            <span>12 Roles</span>
-            <span>UK vs Overseas</span>
-            <span>18 Pages</span>
+          <div class="footer-strip">12 roles · UK vs Overseas · 18 pages</div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="form-eyebrow">Download — Free, PDF</div>
+
+        <form id="guideForm" novalidate>
+          <h2>Sent straight to <em>your inbox.</em></h2>
+
+          <div class="field" data-field="name">
+            <label for="name">Your name <span class="req">*</span></label>
+            <input type="text" id="name" name="name" autocomplete="name" required />
+            <div class="field-error">Please tell us your name.</div>
           </div>
-        </div>
-      </div>
 
-    </div>
-  </main>
-
-  <!-- ---------- Features Column Section ---------- -->
-  <section class="standard" id="inside">
-    <div class="wrap">
-      <div class="section-eyebrow">Inside the report</div>
-      <h2>A comprehensive blueprint <em>built</em> for scaling modern firms.</h2>
-      <div class="inside-grid">
-        <div class="inside-col">
-          <div class="inside-num">01</div>
-          <h3>Fully loaded realities</h3>
-          <p>We do not just track basic flat base pay figures. Our calculations evaluate real operational variables down to the pound.</p>
-          <ul class="inside-list">
-            <li>Localized national health levies</li>
-            <li>Mandatory severance provisions</li>
-            <li>Regional software license fees</li>
-          </ul>
-        </div>
-        <div class="inside-col">
-          <div class="inside-num">02</div>
-          <h3>Eighteen pages of data</h3>
-          <p>Clean tabular charts sorting entry, mid, and executive leadership brackets across competitive global ecosystems.</p>
-          <ul class="inside-list">
-            <li>Eastern Europe software hubs</li>
-            <li>LATAM growth marketing centers</li>
-            <li>South African customer operations</li>
-          </ul>
-        </div>
-        <div class="inside-col">
-          <div class="inside-num">03</div>
-          <h3>Compliance runbooks</h3>
-          <p>Avoid expensive legal structuring traps. Know exactly when to employ simple contractors versus setting up localized EOR structures.</p>
-          <ul class="inside-list">
-            <li>Permanent establishment risks</li>
-            <li>IP assignment safety protocols</li>
-            <li>Local work hours statutes</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ---------- Editorial Quote Section ---------- -->
-  <section class="standard">
-    <div class="wrap pullquote-wrap">
-      <div class="pullquote-mark">“</div>
-      <blockquote class="pullquote">
-        “The financial disparity between regional UK hubs and premium global talent pipelines isn't decreasing—it's widening. Teams that fail to utilize cross-border hiring will find themselves outcompeted on pure engineering velocity.”
-      </blockquote>
-      <div class="pullquote-attrib">Founding Partner, global infrastructure ventures</div>
-    </div>
-  </section>
-
-  <!-- ---------- Interactive Accordion Section ---------- -->
-  <section class="standard" id="faq">
-    <div class="wrap">
-      <div class="faq-head">
-        <div class="section-eyebrow">Common Queries</div>
-        <h2>Answers for <em>finance</em> directors.</h2>
-      </div>
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-q">Where does this placement data originate from?<span class="faq-icon">+</span></button>
-          <div class="faq-a">
-            <div class="faq-a-inner">
-              Our figures are pulled exclusively from signed corporate offers and localized compensation audits managed directly within our processing network, ensuring precise accuracy compared to public web questionnaires.
-            </div>
+          <div class="field" data-field="email">
+            <label for="email">Work email <span class="req">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" required />
+            <div class="field-error">Please enter a valid email address.</div>
           </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Is this guide updated for changing cross-border tax regulations?<span class="faq-icon">+</span></button>
-          <div class="faq-a">
-            <div class="faq-a-inner">
-              Yes, our compliance review matrices are refreshed quarterly to account for updated international working tax definitions, payroll standards, and reporting guidelines.
-            </div>
+
+          <div class="submit-row">
+            <button type="submit" class="cta accent" id="submitBtn">Send me the guide</button>
+            <div class="submit-fineprint">No spam. <strong>Unsubscribe in one click.</strong></div>
           </div>
+        </form>
+
+        <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+          <div class="success-mark">§</div>
+          <h2 class="success-title">On its way. <em>Check your inbox.</em></h2>
+          <p class="success-body">The guide should arrive within a couple of minutes. If it doesn't — check your spam folder, or reply to any email from us and we'll resend it.</p>
+          <div class="success-meta">Sent · &lt; 2 minutes</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- ---------- Final Call to Action Panel ---------- -->
-  <section class="standard">
-    <div class="wrap next-step">
-      <div class="eyebrow">Support Hub</div>
-      <h2>The hire you've been putting off — <em>at a price that finally makes sense.</em></h2>
-      <a href="contact.html" class="cta accent">Start hiring</a>
-      <div class="next-reassure">Fixed fees only. <em>Only pay when you hire.</em></div>
+<!-- Next step -->
+<section class="next-step">
+  <div class="wrap">
+    <div class="eyebrow">Already read the figures?</div>
+    <h2>The hire you've been putting off <em>— at a price that finally makes sense.</em></h2>
+    <a href="contact.html" class="cta accent">Start hiring &nbsp;→</a>
+    <p class="next-reassure"><em>Zero risk.</em> Only pay when you hire.</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="logo footer-logo"><span class="mark">§</span>Hire Anywhere</a>
+      <p class="footer-copy">© 2026 Hire Anywhere</p>
     </div>
-  </section>
+    <nav class="footer-nav" aria-label="Pages">
+      <a href="index.html">Home</a>
+      <a href="success-stories.html">Success stories</a>
+      <a href="salary-guide.html">Salary guide</a>
+      <a href="careers.html">Careers</a>
+      <a href="contact.html">Contact us</a>
+      <a href="partners.html">Partner with us</a>
+    </nav>
+    <nav class="footer-legal" aria-label="Legal">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</footer>
 
-  <!-- ---------- Global Unified Layout Footer ---------- -->
-  <footer class="site-footer">
-    <div class="wrap">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <a href="index.html" class="footer-logo"><span class="mark">§</span>Hire Anywhere</a>
-          <p class="footer-copy">© 2026 Hire Anywhere</p>
-        </div>
-        <nav class="footer-nav" aria-label="Pages Nav">
-          <a href="index.html">Home</a>
-          <a href="success-stories.html">Success stories</a>
-          <a href="salary-guide.html">Salary guide</a>
-          <a href="contact.html">Contact us</a>
-        </nav>
-        <nav class="footer-legal" aria-label="Legal Nav">
-          <a href="terms.html">Terms</a>
-          <a href="privacy.html">Privacy</a>
-        </nav>
-      </div>
-    </div>
-  </footer>
+<script>
+  (function () {
+    const dropdown = document.querySelector('.nav-dropdown');
+    if (!dropdown) return;
+    const trigger = dropdown.querySelector('.nav-trigger');
+    const menu = dropdown.querySelector('.nav-menu');
+    function open() { dropdown.classList.add('is-open'); trigger.setAttribute('aria-expanded', 'true'); }
+    function close() { dropdown.classList.remove('is-open'); trigger.setAttribute('aria-expanded', 'false'); }
+    function toggle() { dropdown.classList.contains('is-open') ? close() : open(); }
+    trigger.addEventListener('click', e => { e.stopPropagation(); toggle(); });
+    document.addEventListener('click', e => { if (!dropdown.contains(e.target)) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    menu.querySelectorAll('.nav-menu-item').forEach(item => item.addEventListener('click', close));
+  })();
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Nav Dropdown functionality
-      const dropdown = document.getElementById('guidesDropdown');
-      const trigger = dropdown.querySelector('.nav-trigger');
-
-      trigger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isOpen = dropdown.classList.contains('is-open');
-        dropdown.classList.toggle('is-open', !isOpen);
-        trigger.setAttribute('aria-expanded', !isOpen);
-      });
-
-      document.addEventListener('click', (e) => {
-        if (!dropdown.contains(e.target)) {
-          dropdown.classList.remove('is-open');
-          trigger.setAttribute('aria-expanded', 'false');
-        }
-      });
-
-      // FAQ Accordion functionality
-      const faqItems = document.querySelectorAll('.faq-item');
-      faqItems.forEach(item => {
-        const questionButton = item.querySelector('.faq-q');
-        questionButton.addEventListener('click', () => {
-          const isOpen = item.classList.contains('is-open');
-          faqItems.forEach(i => i.classList.remove('is-open'));
-          if (!isOpen) {
-            item.classList.add('is-open');
-          }
-        });
-      });
-
-      // Form Success state presentation handler
-      const form = document.getElementById('salaryForm');
-      const successState = document.getElementById('successState');
-      if(form && successState) {
-        form.addEventListener('submit', (e) => {
-          e.preventDefault();
-          form.classList.add('is-hidden');
-          successState.classList.add('is-visible');
-        });
-      }
+  const form = document.getElementById('guideForm');
+  const successEl = document.getElementById('formSuccess');
+  const validators = {
+    name: v => v.trim().length >= 1,
+    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
+  };
+  function clearError(fieldEl) { fieldEl.classList.remove('has-error'); }
+  function showError(fieldEl) { fieldEl.classList.add('has-error'); }
+  form.addEventListener('input', e => { const fieldEl = e.target.closest('.field'); if (fieldEl) clearError(fieldEl); });
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    let firstInvalid = null;
+    ['name', 'email'].forEach(key => {
+      const fieldEl = form.querySelector(`.field[data-field="${key}"]`);
+      const input = fieldEl.querySelector('input');
+      const valid = validators[key](input.value);
+      if (!valid) { showError(fieldEl); if (!firstInvalid) firstInvalid = input; } else { clearError(fieldEl); }
     });
-  </script>
-
+    if (firstInvalid) { firstInvalid.focus(); return; }
+    form.classList.add('is-hidden');
+    successEl.classList.add('is-visible');
+    document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>
 </body>
 </html>
