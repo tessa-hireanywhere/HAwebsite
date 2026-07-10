@@ -17,7 +17,6 @@
   .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
   .page-wrap { max-width: 760px; margin: 0 auto; padding: clamp(4rem,8vw,6rem) clamp(1.5rem,3vw,2rem) clamp(4rem,8vw,6rem); }
   .page-eyebrow { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-mute); margin-bottom:1.5rem; }
-  /* Matches site-wide h2 scale, per brand consistency pass */
   .page-wrap h1 {
     font-family:'Fraunces',serif; font-variation-settings:"opsz" 144,"SOFT" 50; font-weight:400;
     font-size:clamp(1.7rem,3.2vw,2.4rem); line-height:1.15; letter-spacing:-0.015em; margin-bottom:.75rem;
@@ -38,8 +37,8 @@
   .nav-right { display: flex; align-items: center; gap: clamp(1.25rem, 3vw, 2rem); }
   .nav-link { font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); text-decoration: none; transition: color 0.18s ease; position: relative; display: inline-flex; align-items: center; line-height: 1; }
   .nav-link:hover { color: var(--ink); }
-  .nav-dropdown { position: relative; }
-  .nav-trigger { -webkit-appearance: none; -moz-appearance: none; appearance: none; background: transparent; border: none; outline: none; padding: 0; margin: 0; height: auto; min-height: 0; cursor: pointer; display: inline-flex; align-items: center; vertical-align: middle; gap: 0.45rem; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); line-height: 1; box-sizing: content-box; }
+  .nav-dropdown { position: relative; display: inline-flex; align-items: center; }
+  .nav-trigger { cursor: pointer; }
   .nav-trigger .nav-chev { font-size: 9px; color: var(--ink-mute); transition: transform 0.2s ease, color 0.18s ease; display: inline-block; transform: translateY(-1px); }
   .nav-trigger:hover .nav-chev, .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
   .nav-trigger[aria-expanded="true"] .nav-chev { transform: translateY(-1px) rotate(180deg); }
@@ -77,9 +76,9 @@
     <div class="nav-right">
       <a href="success-stories.html" class="nav-link">Success stories</a>
       <div class="nav-dropdown">
-        <button type="button" class="nav-link nav-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
+        <span class="nav-link nav-trigger" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
           Guides <span class="nav-chev" aria-hidden="true">▾</span>
-        </button>
+        </span>
         <div class="nav-menu" id="guides-menu" role="menu">
           <a href="salary-guide.html" class="nav-menu-item" role="menuitem">
             <span class="nav-menu-title">Salary Guide</span>
@@ -87,7 +86,7 @@
           </a>
         </div>
       </div>
-      <a href="contact.html" class="cta nav-cta-hide">Start hiring</a>
+      <a href="start-hiring.html" class="cta nav-cta-hide">Start hiring</a>
     </div>
   </div>
 </nav>
@@ -129,6 +128,7 @@
   var t=document.querySelector('.nav-trigger'),d=document.querySelector('.nav-dropdown');
   if(t&&d){
     t.addEventListener('click',function(e){e.stopPropagation();d.classList.toggle('is-open');t.setAttribute('aria-expanded',d.classList.contains('is-open'));});
+    t.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();d.classList.toggle('is-open');t.setAttribute('aria-expanded',d.classList.contains('is-open'));}});
     document.addEventListener('click',function(){if(d)d.classList.remove('is-open');});
   }
 })();
