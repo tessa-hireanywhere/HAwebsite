@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Partner with Us — Hire Anywhere</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Balanced font weights and configurations matching the core system -->
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #F1EBDD;
@@ -21,302 +18,76 @@
     --accent-deep: #8A3416;
     --max-w: 1080px;
     --gutter: clamp(1.25rem, 4vw, 2.5rem);
-    --serif: 'Fraunces', Georgia, serif;
-    --sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
   }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-
   body {
     background: var(--paper);
     color: var(--ink);
-    font-family: var(--sans);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 17px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     font-feature-settings: "ss01", "cv11";
   }
-
-  .wrap {
-    max-width: var(--max-w);
-    margin: 0 auto;
-    padding: 0 var(--gutter);
+  .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
+  .page-wrap { max-width: 760px; margin: 0 auto; padding: clamp(4rem,8vw,6rem) clamp(1.5rem,3vw,2rem) clamp(4rem,8vw,6rem); }
+  .page-eyebrow { font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-mute); margin-bottom:1.5rem; }
+  .page-wrap h1 {
+    font-family:'Fraunces',serif; font-variation-settings:"opsz" 144,"SOFT" 50; font-weight:400;
+    font-size:clamp(1.7rem,3.2vw,2.4rem); line-height:1.15; letter-spacing:-0.015em; margin-bottom:.75rem;
   }
+  .page-wrap h2 {
+    font-family:'Fraunces',serif; font-variation-settings:"opsz" 144,"SOFT" 50; font-weight:400;
+    font-size:clamp(1.7rem,3.2vw,2.4rem); line-height:1.15; letter-spacing:-0.015em; color:var(--ink); margin:2.25rem 0 .6rem;
+  }
+  .page-wrap p { font-size:1rem; line-height:1.8; color:var(--ink-soft); margin-bottom:1rem; }
+  .page-wrap a { color:var(--accent); }
+  .page-wrap a.cta { color: var(--paper); }
+  .page-wrap a.cta:hover { color: var(--paper); }
 
   /* ---------- Nav ---------- */
-  nav { border-bottom: 1px solid var(--rule); padding: 1.5rem 0; }
+  body > nav { border-bottom: 1px solid var(--rule); padding: 1.5rem 0; }
   nav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
-  
-  .logo {
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 144, "SOFT" 30;
-    font-weight: 500;
-    font-size: 1.4rem;
-    letter-spacing: -0.015em;
-    color: var(--ink);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.45rem;
-  }
-  .logo .mark {
-    font-style: italic;
-    color: var(--accent);
-    font-weight: 400;
-    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
-  }
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: clamp(1.25rem, 3vw, 2rem);
-  }
-  .nav-link {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    text-decoration: none;
-    transition: color 0.18s ease;
-    position: relative;
-  }
+  .logo { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 30; font-weight: 500; font-size: 1.4rem; letter-spacing: -0.015em; color: var(--ink); text-decoration: none; display: inline-flex; align-items: baseline; gap: 0.45rem; }
+  .logo .mark { font-style: italic; color: var(--accent); font-weight: 400; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .nav-right { display: flex; align-items: center; gap: clamp(1.25rem, 3vw, 2rem); }
+  .nav-link { font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); text-decoration: none; transition: color 0.18s ease; position: relative; display: inline-flex; align-items: center; line-height: 1; }
   .nav-link:hover { color: var(--ink); }
-
-  /* Dropdown System */
   .nav-dropdown { position: relative; }
-  .nav-trigger {
-    background: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-  }
-  .nav-trigger .nav-chev {
-    font-size: 9px;
-    color: var(--ink-mute);
-    transition: transform 0.2s ease, color 0.18s ease;
-    display: inline-block;
-    transform: translateY(-1px);
-  }
-  .nav-trigger:hover .nav-chev,
-  .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
+  .nav-trigger { -webkit-appearance: none; -moz-appearance: none; appearance: none; background: transparent; border: none; outline: none; padding: 0; margin: 0; height: auto; min-height: 0; cursor: pointer; display: inline-flex; align-items: center; vertical-align: middle; gap: 0.45rem; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); line-height: 1; box-sizing: content-box; }
+  .nav-trigger .nav-chev { font-size: 9px; color: var(--ink-mute); transition: transform 0.2s ease, color 0.18s ease; display: inline-block; transform: translateY(-1px); }
+  .nav-trigger:hover .nav-chev, .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
   .nav-trigger[aria-expanded="true"] .nav-chev { transform: translateY(-1px) rotate(180deg); }
-
-  .nav-menu {
-    position: absolute;
-    top: calc(100% + 0.95rem);
-    right: 0;
-    min-width: 260px;
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    box-shadow: 4px 4px 0 var(--paper-deep), 4px 4px 0 1px var(--rule);
-    padding: 0.5rem 0;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-4px);
-    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
-    z-index: 50;
-  }
-  .nav-menu::before {
-    content: "";
-    position: absolute;
-    top: -5px;
-    right: 1.5rem;
-    width: 8px;
-    height: 8px;
-    background: var(--paper);
-    border-top: 1px solid var(--rule);
-    border-left: 1px solid var(--rule);
-    transform: rotate(45deg);
-  }
-  .nav-dropdown.is-open .nav-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  .nav-menu-item {
-    display: block;
-    padding: 0.85rem 1.25rem;
-    text-decoration: none;
-    color: var(--ink);
-    transition: background 0.15s ease;
-    border-left: 2px solid transparent;
-  }
+  .nav-trigger[aria-expanded="true"] { color: var(--ink); }
+  .nav-menu { position: absolute; top: calc(100% + 0.95rem); right: 0; min-width: 260px; background: var(--paper); border: 1px solid var(--rule); box-shadow: 4px 4px 0 var(--paper-deep), 4px 4px 0 1px var(--rule); padding: 0.5rem 0; opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease; z-index: 50; }
+  .nav-menu::before { content: ""; position: absolute; top: -5px; right: 1.5rem; width: 8px; height: 8px; background: var(--paper); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); transform: rotate(45deg); }
+  .nav-dropdown.is-open .nav-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+  .nav-menu-item { display: block; padding: 0.85rem 1.25rem; text-decoration: none; color: var(--ink); transition: background 0.15s ease; border-left: 2px solid transparent; }
   .nav-menu-item:hover { background: var(--paper-deep); border-left-color: var(--accent); }
-  .nav-menu-title {
-    display: block;
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 144, "SOFT" 50;
-    font-weight: 500;
-    font-size: 1rem;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 0.15rem;
-  }
-  .nav-menu-meta {
-    display: block;
-    font-family: 'Geist Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-  }
-
-  .cta {
-    display: inline-block;
-    background: var(--ink);
-    color: var(--paper);
-    padding: 0.8rem 1.35rem;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    letter-spacing: 0.01em;
-    transition: background 0.18s ease, border-color 0.18s ease;
-    border: 1px solid var(--ink);
-    font-family: var(--sans);
-    cursor: pointer;
-  }
+  .nav-menu-title { display: block; font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 500; font-size: 1rem; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.15rem; }
+  .nav-menu-meta { display: block; font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); }
+  .cta { display: inline-block; background: var(--ink); color: var(--paper); padding: 0.8rem 1.35rem; font-size: 14px; font-weight: 500; text-decoration: none; letter-spacing: 0.01em; transition: background 0.18s ease, border-color 0.18s ease; border: 1px solid var(--ink); font-family: 'Geist', sans-serif; cursor: pointer; }
   .cta:hover { background: var(--accent); border-color: var(--accent); }
+  @media (max-width: 540px) { .nav-right { gap: 1rem; } .nav-cta-hide { display: none; } .nav-menu { min-width: 230px; } }
+  @media (max-width: 768px) { .nav-right { display: none !important; } }
 
-  /* ---------- PAGE CONTAINER LAYOUT ---------- */
-  .page-wrap { max-width: 760px; margin: 0 auto; padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 3vw, 2rem); }
-  
-  /* REVERTIED: True clean tracked layout labels */
-  .page-eyebrow, .stats-label { 
-    font-family: 'Geist Mono', monospace; 
-    font-size: 11px; 
-    font-weight: 500;
-    letter-spacing: 0.16em; 
-    text-transform: uppercase; 
-    color: var(--ink-mute); 
-    margin-bottom: 1.5rem; 
-  }
-  
-  /* FINAL FIXED H1: Set to clean 400 weight with structural SOFT setting matching the home page shot precisely */
-  .page-wrap h1 { 
-    font-family: var(--serif);
-    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; 
-    font-size: clamp(2.8rem, 6vw, 4.2rem); 
-    font-weight: 400;
-    line-height: 1.1;                             
-    letter-spacing: -0.015em;                       
-    color: var(--ink);
-    margin-top: 0.5rem;
-    margin-bottom: 2rem; 
-  }
-
-  .page-wrap h2 { 
-    font-family: var(--serif); 
-    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; 
-    font-size: clamp(1.8rem, 3.5vw, 2.2rem); 
-    font-weight: 400; 
-    color: var(--ink); 
-    letter-spacing: -0.01em;
-    margin: 3.5rem 0 1rem; 
-  }
-  
-  .page-wrap p { font-size: 1.05rem; line-height: 1.75; color: var(--ink-soft); margin-bottom: 1.25rem; }
-  .page-wrap a { color: var(--accent); text-decoration: underline; transition: color 0.15s ease; }
-  .page-wrap a:hover { color: var(--accent-deep); }
-
-  /* Stats Panel Component Rules */
-  .stats-grid { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 0; 
-    border-top: 1px solid var(--rule); 
-    border-bottom: 1px solid var(--rule); 
-    margin: 3.5rem 0; 
-  }
-  .stats-col { padding: 1.75rem 1.25rem; border-right: 1px solid var(--rule); }
-  .stats-col:first-child { padding-left: 0; }
-  .stats-col:last-child { padding-right: 0; border-right: none; }
-  
-  .stats-label { margin-bottom: .8rem; }
-  
-  /* FINAL FIXED NUMBERS: Matches the elegant rounded serifs of the home page style */
-  .stats-num { 
-    font-family: var(--serif); 
-    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; 
-    font-size: clamp(1.8rem, 3.5vw, 2.4rem); 
-    font-weight: 400;
-    color: var(--ink); 
-    line-height: 1.1; 
-    margin-top: 0.15rem;
-  }
-  .stats-meta { font-size: .85rem; color: var(--ink-mute); margin-top: .4rem; margin-bottom: 0 !important; }
-
-  @media (max-width: 600px) {
-    .stats-grid { grid-template-columns: 1fr; border-bottom: none; }
-    .stats-col { padding: 1.5rem 0; border-right: none; border-bottom: 1px solid var(--rule); }
-    .stats-col:first-child { padding-top: 1.5rem; }
-  }
-
-  /* Booking Container Block */
-  .partner-box { margin: 2.5rem 0; padding: 2.5rem; border: 1px solid var(--rule); background: var(--paper-deep); text-align: center; }
-  .partner-box-label { font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 1.25rem; }
-  
-  .partner-box .cta { 
-    display: inline-block; 
-    background: var(--accent); 
-    color: var(--paper); 
-    border: 1px solid var(--accent);
-    padding: 0.85rem 2rem; 
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    transition: background 0.2s ease, border-color 0.2s ease;
-  }
-  .partner-box .cta:hover { background: var(--ink); border-color: var(--ink); }
-  .partner-box-meta { font-size: .8rem; color: var(--ink-mute); margin-top: 1.25rem; margin-bottom: 0 !important; }
-
-  /* ---------- Footer styles ---------- */
-  footer.site-footer { 
-    background: #1A1D1A !important; 
-    color: #C9BFA8 !important; 
-    padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4rem) !important; 
-    margin-top: 5rem;
-  }
-  .footer-inner { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.5rem 3rem; max-width: 1120px; margin: 0 auto; }
+  /* ---------- Footer ---------- */
+  footer.site-footer { background: var(--ink) !important; color: #C9BFA8 !important; padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem) !important; border-top: none; }
+  .footer-inner { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.75rem 3rem; max-width: 1120px; margin: 0 auto; }
   .footer-brand { flex: 1 1 200px; }
   .footer-logo { font-family: 'Fraunces', serif; font-size: 1.1rem; color: #F1EBDD !important; text-decoration: none; display: inline-flex; align-items: baseline; gap: .4rem; }
-  .footer-logo .mark { color: #B0421C; font-style: italic; }
+  .footer-logo .mark { color: var(--accent); font-style: italic; }
   .footer-copy { font-family: 'Geist Mono', monospace; font-size: .75rem; letter-spacing: .08em; color: #6B6A60; margin-top: .5rem; }
-  .footer-nav, .footer-legal { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; }
-  .footer-nav a, .footer-legal a { font-family: var(--sans); font-size: .85rem; color: #C9BFA8 !important; text-decoration: none; transition: color .2s; }
-  .footer-nav a:hover, .footer-legal a:hover { color: #B0421C !important; }
-
-  /* Layout Queries Breakpoints */
-  @media (max-width: 768px) {
-    .nav-right { display: none !important; }
-    .nav-mobile-cta { display: inline-block !important; }
-    .footer-inner { flex-direction: column; gap: 1.25rem; }
-  }
-  @media (min-width: 769px) {
-    .nav-mobile-cta { display: none !important; }
-  }
-  .nav-mobile-cta {
-    background: #1A1D1A; color: #F1EBDD;
-    font-family: var(--sans);
-    font-size: .8rem; font-weight: 500;
-    padding: .5rem 1rem;
-    text-decoration: none; display: none;
-  }
-  @media (max-width: 540px) {
-    .nav-right { gap: 1rem; }
-    .nav-cta-hide { display: none; }
-    .nav-menu { min-width: 230px; }
-  }
+  .footer-nav, .footer-legal { display: flex; flex-wrap: wrap; gap: .6rem 1.75rem; align-items: center; }
+  .footer-nav { flex: 2 1 380px; }
+  .footer-nav a, .footer-legal a { font-family: 'Geist', system-ui, sans-serif; font-size: .85rem; color: #C9BFA8 !important; text-decoration: none; transition: color .2s; }
+  .footer-nav a:hover, .footer-legal a:hover { color: var(--accent) !important; }
+  @media (max-width: 640px) { .footer-inner { flex-direction: column; gap: 1.25rem; } }
 </style>
 </head>
 <body>
-
-<!-- NAVIGATION BAR -->
 <nav>
   <div class="wrap">
     <a href="index.html" class="logo"><span class="mark">§</span>Hire Anywhere</a>
@@ -335,47 +106,38 @@
       </div>
       <a href="contact.html" class="cta nav-cta-hide">Start hiring</a>
     </div>
-    <a href="contact.html" class="nav-mobile-cta">Start hiring</a>
   </div>
 </nav>
-
-<!-- MAIN WORK AREA CONTAINER -->
 <div class="page-wrap">
   <p class="page-eyebrow">Referral Programme</p>
   <h1>Partner with us.</h1>
-  <p style="color: var(--ink-soft); max-width: 600px; margin-bottom: 2.5rem;">We work with accountants, fractional CFOs and business advisors who advise UK founder-led businesses. If your clients are growing and stretched on headcount, we can help — and we pay a referral fee on every placement.</p>
-  
-  <div class="stats-grid">
-    <div class="stats-col">
-      <p class="stats-label">Referral fee</p>
-      <p class="stats-num">10%</p>
-      <p class="stats-meta">of first-year placement fee</p>
+  <p style="color:var(--ink-mute);max-width:600px;margin-bottom:2.5rem">We work with accountants, fractional CFOs and business advisors who advise UK founder-led businesses. If your clients are growing and stretched on headcount, we can help — and we pay a referral fee on every placement.</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rule);margin-bottom:3rem">
+    <div style="padding:1.75rem 1.75rem 1.75rem 0;border-right:1px solid var(--rule)">
+      <p style="font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:.6rem">Referral fee</p>
+      <p style="font-family:'Fraunces',serif;font-size:1.8rem;color:var(--ink);line-height:1">10%</p>
+      <p style="font-size:.85rem;color:var(--ink-mute);margin-top:.4rem">of first-year placement fee</p>
     </div>
-    <div class="stats-col">
-      <p class="stats-label">When paid</p>
-      <p class="stats-num">30 days</p>
-      <p class="stats-meta">after invoice clears</p>
+    <div style="padding:1.75rem;border-right:1px solid var(--rule)">
+      <p style="font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:.6rem">When paid</p>
+      <p style="font-family:'Fraunces',serif;font-size:1.8rem;color:var(--ink);line-height:1">30 days</p>
+      <p style="font-size:.85rem;color:var(--ink-mute);margin-top:.4rem">after invoice clears</p>
     </div>
-    <div class="stats-col">
-      <p class="stats-label">Upfront cost</p>
-      <p class="stats-num">£0</p>
-      <p class="stats-meta">no cost to refer</p>
+    <div style="padding:1.75rem 0 1.75rem 1.75rem">
+      <p style="font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:.6rem">Upfront cost</p>
+      <p style="font-family:'Fraunces',serif;font-size:1.8rem;color:var(--ink);line-height:1">£0</p>
+      <p style="font-size:.85rem;color:var(--ink-mute);margin-top:.4rem">no cost to refer</p>
     </div>
   </div>
-
   <h2>Book an intro call</h2>
   <p>The easiest way to start is a 20-minute call. Pick a time and we'll walk you through how the programme works.</p>
-  
-  <div class="partner-box">
-    <p class="partner-box-label">Book a partner intro call</p>
-    <a href="https://hireanywhere2.zohobookings.com/#/partners" target="_blank" rel="noopener" class="cta">Choose a time →</a>
-    <p class="partner-box-meta">20 mins · no commitment</p>
+  <div style="margin:2rem 0;padding:2rem;border:1px solid var(--rule);background:var(--paper-deep);text-align:center">
+    <p style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:1rem">Book a partner intro call</p>
+    <a href="https://hireanywhere2.zohobookings.com/#/partners" target="_blank" rel="noopener" class="cta" style="display:inline-block">Choose a time →</a>
+    <p style="font-size:.8rem;color:var(--ink-mute);margin-top:1rem">20 mins · no commitment</p>
   </div>
-  
   <p>Prefer to message first? <a href="contact.html">Get in touch</a>.</p>
 </div>
-
-<!-- SITE FOOTER -->
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand">
@@ -386,6 +148,7 @@
       <a href="index.html">Home</a>
       <a href="success-stories.html">Success stories</a>
       <a href="salary-guide.html">Salary guide</a>
+      <a href="careers.html">Careers</a>
       <a href="contact.html">Contact us</a>
       <a href="partners.html">Partner with us</a>
     </nav>
@@ -395,16 +158,14 @@
     </nav>
   </div>
 </footer>
-
 <script>
 (function(){
-  var t=document.querySelector('.nav-trigger'), d=document.querySelector('.nav-dropdown');
+  var t=document.querySelector('.nav-trigger'),d=document.querySelector('.nav-dropdown');
   if(t&&d){
     t.addEventListener('click',function(e){e.stopPropagation();d.classList.toggle('is-open');t.setAttribute('aria-expanded',d.classList.contains('is-open'));});
     document.addEventListener('click',function(){if(d)d.classList.remove('is-open');});
   }
 })();
 </script>
-
 </body>
 </html>
