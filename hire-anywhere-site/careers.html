@@ -6,49 +6,48 @@
 <title>Hire Anywhere — Find a remote role that actually fits</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- FIXED: Unified font imports with exact variable axes matching Home/Contact -->
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300;9..144,400;9..144,500;9..144,600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
   :root {
     --paper: #F1EBDD;
     --paper-deep: #E5DCC6;
-    --input: #FBF7EC;
     --ink: #1A1D1A;
     --ink-soft: #3A3D38;
     --ink-mute: #6B6A60;
     --rule: #C9BFA8;
     --accent: #B0421C;
     --accent-deep: #8A3416;
-    --max-w: 1080px;
-    --gutter: clamp(1.25rem, 4vw, 2.5rem);
+    --linen: #EEE9E1;
+    --stone: #DDD7CC;
+    --pebble: #C4BEB4;
+    --clay: #6E6659;
+    --bark: #3A352E;
+    --soil: #2A2623;
+    --border: rgba(42,38,35,0.12);
+    --border-soft: rgba(42,38,35,0.07);
     --serif: 'Fraunces', Georgia, serif;
-    --sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif; /* FIXED: Removed DM Sans */
+    --sans:  'Geist', system-ui, sans-serif;
   }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--paper);
-    color: var(--ink);
     font-family: var(--sans);
-    font-size: 17px;
-    line-height: 1.6;
+    background: var(--paper);
+    color: var(--bark);
+    line-height: 1.7;
+    font-size: 16px;
+    font-weight: 300;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-feature-settings: "ss01", "cv11";
   }
 
-  .wrap {
-    max-width: var(--max-w);
-    margin: 0 auto;
-    padding: 0 var(--gutter);
-  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 2.5rem); }
 
-  /* ---------- Nav ---------- */
-  nav { border-bottom: 1px solid var(--rule); padding: 1.5rem 0; }
+  /* ---------- Nav (shared site template) ---------- */
+  body > nav { border-bottom: 1px solid var(--rule); padding: 1.5rem 0; background: var(--paper); position: sticky; top: 0; z-index: 100; }
   nav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
-  
   .logo {
     font-family: 'Fraunces', serif;
     font-variation-settings: "opsz" 144, "SOFT" 30;
@@ -67,11 +66,7 @@
     font-weight: 400;
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: clamp(1.25rem, 3vw, 2rem);
-  }
+  .nav-right { display: flex; align-items: center; gap: clamp(1.25rem, 3vw, 2rem); }
   .nav-link {
     font-family: 'Geist Mono', monospace;
     font-size: 11px;
@@ -81,274 +76,174 @@
     text-decoration: none;
     transition: color 0.18s ease;
     position: relative;
-  }
-  .nav-link:hover { color: var(--ink); }
-  .nav-link.is-active { color: var(--ink); }
-  .nav-link.is-active::after {
-    content: "";
-    position: absolute;
-    left: 0; right: 0;
-    bottom: -6px;
-    height: 1px;
-    background: var(--accent);
-  }
-
-  /* Dropdown */
-  .nav-dropdown { position: relative; }
-  .nav-trigger {
-    background: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
+    line-height: 1;
   }
-  .nav-trigger .nav-chev {
-    font-size: 9px;
-    color: var(--ink-mute);
-    transition: transform 0.2s ease, color 0.18s ease;
-    display: inline-block;
-    transform: translateY(-1px);
-  }
-  .nav-trigger:hover .nav-chev,
-  .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
+  .nav-link:hover { color: var(--ink); }
+  .nav-dropdown { position: relative; }
+  .nav-trigger { -webkit-appearance: none; -moz-appearance: none; appearance: none; background: transparent; border: none; outline: none; padding: 0; margin: 0; height: auto; min-height: 0; cursor: pointer; display: inline-flex; align-items: center; vertical-align: middle; gap: 0.45rem; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); line-height: 1; box-sizing: content-box; }
+  .nav-trigger .nav-chev { font-size: 9px; color: var(--ink-mute); transition: transform 0.2s ease, color 0.18s ease; display: inline-block; transform: translateY(-1px); }
+  .nav-trigger:hover .nav-chev, .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
   .nav-trigger[aria-expanded="true"] .nav-chev { transform: translateY(-1px) rotate(180deg); }
   .nav-trigger[aria-expanded="true"] { color: var(--ink); }
-
   .nav-menu {
-    position: absolute;
-    top: calc(100% + 0.95rem);
-    right: 0;
-    min-width: 260px;
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    box-shadow: 4px 4px 0 var(--paper-deep), 4px 4px 0 1px var(--rule);
-    padding: 0.5rem 0;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-4px);
-    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
-    z-index: 50;
+    position: absolute; top: calc(100% + 0.95rem); right: 0; min-width: 260px; background: var(--paper);
+    border: 1px solid var(--rule); box-shadow: 4px 4px 0 var(--paper-deep), 4px 4px 0 1px var(--rule);
+    padding: 0.5rem 0; opacity: 0; visibility: hidden; transform: translateY(-4px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease; z-index: 50;
   }
   .nav-menu::before {
-    content: "";
-    position: absolute;
-    top: -5px;
-    right: 1.5rem;
-    width: 8px;
-    height: 8px;
-    background: var(--paper);
-    border-top: 1px solid var(--rule);
-    border-left: 1px solid var(--rule);
-    transform: rotate(45deg);
+    content: ""; position: absolute; top: -5px; right: 1.5rem; width: 8px; height: 8px;
+    background: var(--paper); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); transform: rotate(45deg);
   }
-  .nav-dropdown.is-open .nav-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  .nav-menu-item {
-    display: block;
-    padding: 0.85rem 1.25rem;
-    text-decoration: none;
-    color: var(--ink);
-    transition: background 0.15s ease;
-    border-left: 2px solid transparent;
-  }
-  .nav-menu-item:hover {
-    background: var(--paper-deep);
-    border-left-color: var(--accent);
-  }
-  .nav-menu-title {
-    display: block;
-    font-family: 'Fraunces', serif;
-    font-variation-settings: "opsz" 144, "SOFT" 50;
-    font-weight: 500;
-    font-size: 1rem;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 0.15rem;
-  }
-  .nav-menu-meta {
-    display: block;
-    font-family: 'Geist Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-  }
-
-  /* Header CTA Button */
-  .cta {
-    display: inline-block;
-    background: var(--ink);
-    color: var(--paper);
-    padding: 0.8rem 1.35rem;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    letter-spacing: 0.01em;
-    transition: background 0.18s ease, border-color 0.18s ease;
-    border: 1px solid var(--ink);
-    font-family: var(--sans);
-    cursor: pointer;
-  }
+  .nav-dropdown.is-open .nav-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+  .nav-menu-item { display: block; padding: 0.85rem 1.25rem; text-decoration: none; color: var(--ink); transition: background 0.15s ease; border-left: 2px solid transparent; }
+  .nav-menu-item:hover { background: var(--paper-deep); border-left-color: var(--accent); }
+  .nav-menu-title { display: block; font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-weight: 500; font-size: 1rem; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.15rem; }
+  .nav-menu-meta { display: block; font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); }
+  .cta { display: inline-block; background: var(--ink); color: var(--paper); padding: 0.8rem 1.35rem; font-size: 14px; font-weight: 500; text-decoration: none; letter-spacing: 0.01em; transition: background 0.18s ease, border-color 0.18s ease; border: 1px solid var(--ink); font-family: 'Geist', sans-serif; cursor: pointer; }
   .cta:hover { background: var(--accent); border-color: var(--accent); }
+  @media (max-width: 540px) { .nav-right { gap: 1rem; } .nav-cta-hide { display: none; } .nav-menu { min-width: 230px; } }
+  @media (max-width: 768px) { .nav-right { display: none !important; } }
 
-  /* FIXED: Primary Buttons now cleanly align with the global template typography rules */
-  .btn-primary {
-    display: inline-block;
-    background: var(--accent) !important;
-    color: var(--paper) !important;
-    padding: 0.8rem 1.5rem;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    letter-spacing: 0.01em;
-    transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
-    border: 1px solid var(--accent) !important;
-    font-family: var(--sans);
-    cursor: pointer;
-  }
-  .btn-primary:hover { 
-    background: var(--ink) !important;
-    border-color: var(--ink) !important;
-  }
-  .btn-primary:active {
-    transform: scale(0.98);
-  }
+  /* LAYOUT */
+  section { padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem); }
+  .container        { max-width: 1120px; margin: 0 auto; }
+  .container-narrow { max-width: 760px;  margin: 0 auto; }
+  .container-mid    { max-width: 920px;  margin: 0 auto; }
 
-  /* LAYOUT BUILDERS */
-  section { padding: clamp(4rem, 8vw, 7rem) 0; }
-  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
-  .container-narrow { max-width: 760px; margin: 0 auto; padding: 0 var(--gutter); }
+  .section-label { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); margin-bottom: 2.5rem; }
 
-  .section-label { font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 1.5rem; }
-
-  /* HERO ELEMENT styling */
+  /* HERO */
   #hero {
-    border-bottom: 1px solid var(--rule);
+    padding: clamp(5rem, 12vw, 10rem) clamp(1.5rem, 5vw, 4rem) clamp(4rem, 8vw, 7rem);
+    border-bottom: 1px solid var(--border-soft);
   }
-  .hero-tag { display: inline-block; font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); border: 1px solid var(--rule); background: var(--paper-deep); padding: 0.35rem 0.85rem; margin-bottom: 2.5rem; }
-  
-  /* FIXED: Added explicit font-variation-settings and verified sizing rules */
-  h1 { 
-    font-family: var(--serif); 
-    font-variation-settings: "opsz" 144, "SOFT" 50;
-    font-size: clamp(2.4rem, 5.8vw, 4.2rem); 
-    line-height: 1.05; 
-    letter-spacing: -0.02em; 
-    color: var(--ink); 
-    font-weight: 400; 
-    margin-bottom: 1.75rem; 
-  }
-  h1 em {
-    font-style: italic;
-    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
-    color: var(--accent);
-  }
-
-  .hero-sub { font-size: 1.15rem; color: var(--ink-soft); line-height: 1.8; max-width: 660px; margin-bottom: 3rem; }
+  .hero-tag { display: inline-block; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--clay); border: 1px solid var(--border); background: var(--linen); padding: 0.35rem 0.85rem; border-radius: 2px; margin-bottom: 2.5rem; }
+  h1 { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 144, "SOFT" 50; font-size: clamp(2.4rem, 5.6vw, 4.2rem); line-height: 1.05; letter-spacing: -0.02em; color: var(--soil); font-weight: 400; margin-bottom: 1.75rem; }
+  .hero-sub { font-size: clamp(1rem, 1.5vw, 1.125rem); color: var(--clay); line-height: 1.75; max-width: 620px; margin-bottom: 3rem; font-weight: 300; }
   .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
-  
-  .btn-secondary { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--ink); background: transparent; border: 1px solid var(--ink); padding: 0.8rem 1.5rem; cursor: pointer; text-decoration: none; transition: border-color 0.2s, background 0.2s; }
-  .btn-secondary:hover { background: var(--paper-deep); }
+  .btn-primary { font-family: var(--sans); font-size: 0.9rem; font-weight: 400; letter-spacing: 0.01em; color: var(--paper); background: var(--soil); border: 1px solid var(--soil); padding: 0.8rem 1.75rem; border-radius: 2px; cursor: pointer; text-decoration: none; transition: opacity 0.2s; display: inline-block; }
+  .btn-primary:hover { opacity: 0.82; }
+  .btn-secondary { font-family: var(--sans); font-size: 0.9rem; font-weight: 400; letter-spacing: 0.01em; color: var(--bark); background: transparent; border: 1px solid var(--border); padding: 0.8rem 1.75rem; border-radius: 2px; cursor: pointer; text-decoration: none; transition: border-color 0.2s, background 0.2s; }
+  .btn-secondary:hover { background: var(--linen); border-color: var(--pebble); }
 
-  /* SYSTEM TYPOGRAPHY */
-  h2 { font-family: var(--serif); font-variation-settings: "opsz" 144, "SOFT" 50; font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 400; color: var(--ink); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.25rem; }
-  h3 { font-family: var(--sans); font-size: 1.1rem; font-weight: 500; color: var(--ink); margin-bottom: 0.75rem; }
-  p { color: var(--ink-soft); }
+  /* TYPOGRAPHY */
+  h2 { font-family: var(--serif); font-size: clamp(1.7rem, 3.2vw, 2.4rem); font-weight: 400; color: var(--soil); letter-spacing: -0.015em; line-height: 1.15; margin-bottom: 1.25rem; }
+  h3 { font-family: var(--sans); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--soil); margin-bottom: 0.75rem; }
 
-  /* ORIGIN ELEMENT STRIP */
-  #origin {
-    background: var(--paper-deep);
-    border-bottom: 1px solid var(--rule);
-    padding: 1.5rem 0;
-  }
-  .origin-inner {
-    display: flex; align-items: center; gap: 0.5rem;
-    font-size: 0.95rem; color: var(--ink-soft);
-    flex-wrap: wrap;
-  }
+  /* ORIGIN STRIP */
+  #origin { background: var(--linen); border-bottom: 1px solid var(--border-soft); padding: 1rem clamp(1.5rem, 5vw, 4rem); }
+  .origin-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--clay); font-weight: 300; flex-wrap: wrap; }
+  .origin-inner span { color: var(--pebble); }
 
-  /* PROBLEM SECTION */
-  #problem { background: var(--paper-deep); border-bottom: 1px solid var(--rule); }
-  .problem-origin-note { font-size: 1rem; color: var(--ink-soft); font-style: italic; font-family: var(--serif); font-variation-settings: "opsz" 144, "SOFT" 50; background: var(--paper); border-left: 3px solid var(--accent); padding: 0.85rem 1.1rem; margin-bottom: 2.5rem; max-width: 700px; line-height: 1.65; }
-  .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; border: 1px solid var(--rule); background: var(--rule); margin-bottom: 0; }
-  .pain-card { background: var(--paper); padding: 2rem 1.75rem; }
-  .pain-point-title { font-family: var(--sans); font-size: 1.05rem; font-weight: 500; color: var(--ink); margin-bottom: 0.6rem; line-height: 1.5; }
-  .pain-point-text { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.7; }
+  /* PROBLEM */
+  #problem { background: var(--linen); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+  .problem-origin-note { font-size: 0.875rem; color: var(--bark); font-weight: 300; font-style: italic; font-family: var(--serif); background: var(--stone); border-left: 3px solid var(--pebble); padding: 0.85rem 1.1rem; border-radius: 0 2px 2px 0; margin-bottom: 2.5rem; max-width: 700px; line-height: 1.65; }
+  .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; border: 1px solid var(--stone); background: var(--stone); margin-bottom: 0; }
+  .pain-card { background: var(--linen); padding: 2rem 1.75rem; }
+  .pain-point-title { font-family: var(--sans); font-size: 0.975rem; font-weight: 400; color: var(--soil); margin-bottom: 0.6rem; line-height: 1.5; }
+  .pain-point-text { font-size: 0.875rem; color: var(--clay); line-height: 1.7; font-weight: 300; }
 
-  /* APPROACH SECTION */
+  /* APPROACH */
   #approach { background: var(--paper); }
-  .approach-intro { font-size: 1.15rem; color: var(--ink-soft); line-height: 1.8; max-width: 640px; margin-bottom: 3.5rem; }
+  .approach-intro { font-size: 1rem; color: var(--clay); line-height: 1.8; max-width: 640px; margin-bottom: 3.5rem; font-weight: 300; }
   .approach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
-  .approach-card { border: 1px solid var(--rule); padding: 1.75rem; background: var(--paper); transition: border-color 0.2s, background 0.2s; }
-  .approach-card:hover { border-color: var(--ink-mute); background: var(--paper-deep); }
-  .approach-card p { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.7; }
-  .approach-closing { font-family: var(--serif); font-variation-settings: "opsz" 144, "SOFT" 50; font-size: 1.2rem; color: var(--ink-soft); font-style: italic; line-height: 1.65; border-top: 1px solid var(--rule); padding-top: 2rem; margin-top: 3rem; text-align: justify; }
+  .approach-card { border: 1px solid var(--stone); border-radius: 2px; padding: 1.75rem; background: var(--paper); transition: border-color 0.2s, background 0.2s; }
+  .approach-card:hover { border-color: var(--pebble); background: var(--linen); }
+  .approach-card p { font-size: 0.875rem; color: var(--clay); line-height: 1.7; font-weight: 300; }
+  .approach-closing { font-family: var(--serif); font-size: 1.05rem; color: var(--clay); font-style: italic; line-height: 1.65; border-top: 1px solid var(--border-soft); padding-top: 2rem; margin-top: 3rem; text-align: justify; }
 
-  /* STAY CONNECTED SECTION */
-  #stay { background: var(--paper-deep); border-bottom: 1px solid var(--rule); }
+  /* STAY CONNECTED */
+  #stay { background: var(--linen); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
   .stay-inner { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 6vw, 6rem); align-items: start; }
   @media (max-width: 700px) { .stay-inner { grid-template-columns: 1fr; } }
   #stay h2 { margin-bottom: 1.25rem; }
-  .stay-body { font-size: 1rem; color: var(--ink-soft); line-height: 1.8; }
+  .stay-body { font-size: 1rem; color: var(--clay); line-height: 1.8; font-weight: 300; }
   .stay-body p + p { margin-top: 1rem; }
   .stay-body .btn-primary { margin-top: 2rem; }
-  .stay-employed-note { font-size: 0.95rem; color: var(--ink-mute); border-left: 2px solid var(--rule); padding-left: 0.85rem; line-height: 1.65; font-style: italic; }
+  .stay-employed-note { font-size: 0.875rem; color: var(--clay); border-left: 2px solid var(--stone); padding-left: 0.85rem; line-height: 1.65; font-weight: 300; }
   .stay-how { padding-top: 0.5rem; }
-  .stay-how-label { font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 1.25rem; }
-  .stay-how-title { font-family: var(--serif); font-variation-settings: "opsz" 144, "SOFT" 50; font-size: 1.3rem; color: var(--ink); font-weight: 400; margin-bottom: 1.25rem; line-height: 1.3; letter-spacing: -0.01em; }
+  .stay-how-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pebble); margin-bottom: 1.25rem; }
+  .stay-how-title { font-family: var(--serif); font-size: 1.3rem; color: var(--soil); font-weight: 400; margin-bottom: 1.25rem; line-height: 1.3; letter-spacing: -0.01em; }
   .stay-steps { display: flex; flex-direction: column; gap: 0; }
-  .stay-step { display: flex; gap: 1.25rem; align-items: flex-start; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
-  .stay-step:first-child { border-top: 1px solid var(--rule); }
-  .stay-step-num { font-family: var(--serif); font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; font-size: 1.1rem; color: var(--accent); font-style: italic; flex-shrink: 0; padding-top: 0.05rem; min-width: 2rem; }
-  .stay-step-title { font-size: 1rem; font-weight: 500; color: var(--ink); margin-bottom: 0.25rem; }
-  .stay-step-body { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.65; }
+  .stay-step { display: flex; gap: 1.25rem; align-items: flex-start; padding: 1.1rem 0; border-bottom: 1px solid var(--border-soft); }
+  .stay-step:first-child { border-top: 1px solid var(--border-soft); }
+  .stay-step-num { font-family: var(--serif); font-size: 1rem; color: var(--pebble); font-style: italic; flex-shrink: 0; padding-top: 0.05rem; min-width: 2rem; }
+  .stay-step-title { font-size: 0.875rem; font-weight: 500; color: var(--soil); margin-bottom: 0.25rem; }
+  .stay-step-body { font-size: 0.85rem; color: var(--clay); line-height: 1.65; font-weight: 300; }
 
-  /* ---------- Site Footer ---------- */
-  footer.site-footer { 
-    background: #1A1D1A !important; 
-    color: #C9BFA8 !important; 
-    padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem) !important; 
-  }
-  .footer-inner { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.5rem 3rem; max-width: 1120px; margin: 0 auto; }
+  /* WHAT WE BUILD */
+  #build { background: var(--paper); }
+  .build-intro { font-size: 1rem; color: var(--clay); line-height: 1.75; margin-bottom: 3.5rem; font-weight: 300; max-width: 600px; }
+  .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+  @media (max-width: 640px) { .comparison-grid { grid-template-columns: 1fr; } }
+  .comparison-col { padding: 2rem 1.75rem; border: 1px solid var(--stone); border-radius: 2px; }
+  .col-aligned { background: var(--linen); }
+  .col-notfit  { background: var(--paper); }
+  .comparison-col-title { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bark); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--stone); }
+  .comparison-col ul { list-style: none; }
+  .comparison-col ul li { font-size: 0.875rem; color: var(--clay); padding: 0.55rem 0; border-bottom: 1px solid var(--border-soft); line-height: 1.5; font-weight: 300; }
+  .comparison-col ul li:last-child { border-bottom: none; }
+  .comparison-col ul li::before { content: '—'; color: var(--pebble); margin-right: 0.6rem; font-size: 0.8rem; }
+  .closing-line { font-family: var(--serif); font-size: 1.05rem; line-height: 1.65; color: var(--clay); font-style: italic; border-top: 1px solid var(--border-soft); padding-top: 2rem; }
+
+  /* PROCESS */
+  #process { background: var(--linen); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+  .process-steps { margin-bottom: 3rem; }
+  .step { display: grid; grid-template-columns: 3rem 1fr; gap: 1.5rem; padding: 1.75rem 0; border-bottom: 1px solid var(--border-soft); align-items: start; }
+  .step:first-child { border-top: 1px solid var(--border-soft); }
+  .step-num { font-family: var(--serif); font-size: 1.1rem; color: var(--pebble); padding-top: 0.1rem; font-weight: 400; font-style: italic; }
+  .step-content h3 { font-size: 0.85rem; color: var(--soil); margin-bottom: 0.4rem; font-family: var(--sans); font-weight: 500; letter-spacing: 0.03em; text-transform: none; }
+  .step-content p { font-size: 0.875rem; color: var(--clay); line-height: 1.7; font-weight: 300; }
+  .step-content p + p { margin-top: 0.5rem; }
+  .process-note { font-size: 0.875rem; color: var(--clay); font-style: italic; font-family: var(--serif); font-weight: 400; }
+
+  /* TESTIMONIALS */
+  #testimonials { background: var(--linen); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+  .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+  .testimonial-card { border: 1px solid var(--stone); border-radius: 2px; padding: 1.75rem; background: var(--paper); }
+  .testimonial-quote { font-family: var(--serif); font-size: 1rem; color: var(--soil); line-height: 1.75; font-style: italic; margin-bottom: 1.25rem; }
+  .testimonial-attr { font-size: 0.78rem; color: var(--clay); letter-spacing: 0.04em; font-weight: 300; }
+
+  /* FAQ */
+  #faq { background: var(--paper); }
+  .faq-list { margin-top: 2rem; }
+  .faq-item { border-bottom: 1px solid var(--border-soft); }
+  .faq-item:first-child { border-top: 1px solid var(--border-soft); }
+  .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 0; cursor: pointer; gap: 1rem; list-style: none; }
+  .faq-question::-webkit-details-marker { display: none; }
+  .faq-q-text { font-size: 0.95rem; font-weight: 400; color: var(--soil); line-height: 1.5; }
+  .faq-icon { flex-shrink: 0; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; color: var(--clay); font-size: 1.1rem; font-weight: 300; transition: transform 0.25s; user-select: none; }
+  details[open] .faq-icon { transform: rotate(45deg); }
+  .faq-answer { font-size: 0.875rem; color: var(--clay); line-height: 1.8; padding-bottom: 1.5rem; max-width: 680px; font-weight: 300; }
+  .faq-answer p + p { margin-top: 0.75rem; }
+  .faq-answer ul { margin: 0.5rem 0 0 1rem; }
+  .faq-answer ul li { margin-bottom: 0.3rem; }
+
+  /* ---------- Footer (shared site template) ---------- */
+  footer { background: var(--ink); color: #C9BFA8; padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem); }
+  footer.site-footer { background: var(--ink) !important; color: #C9BFA8 !important; padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem) !important; border-top: none; }
+  .footer-inner { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.75rem 3rem; max-width: 1120px; margin: 0 auto; }
   .footer-brand { flex: 1 1 200px; }
   .footer-logo { font-family: 'Fraunces', serif; font-size: 1.1rem; color: #F1EBDD !important; text-decoration: none; display: inline-flex; align-items: baseline; gap: .4rem; }
-  .footer-logo .mark { color: #B0421C; font-style: italic; }
+  .footer-logo .mark { color: var(--accent); font-style: italic; }
   .footer-copy { font-family: 'Geist Mono', monospace; font-size: .75rem; letter-spacing: .08em; color: #6B6A60; margin-top: .5rem; }
-  .footer-nav, .footer-legal { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; }
-  .footer-nav a, .footer-legal a { font-family: var(--sans); font-size: .85rem; color: #C9BFA8 !important; text-decoration: none; transition: color .2s; }
-  .footer-nav a:hover, .footer-legal a:hover { color: #B0421C !important; }
+  .footer-nav, .footer-legal { display: flex; flex-wrap: wrap; gap: .6rem 1.75rem; align-items: center; }
+  .footer-nav { flex: 2 1 380px; }
+  .footer-nav a, .footer-legal a { font-family: 'Geist', system-ui, sans-serif; font-size: .85rem; color: #C9BFA8 !important; text-decoration: none; transition: color .2s; }
+  .footer-nav a:hover, .footer-legal a:hover { color: var(--accent) !important; }
+  @media (max-width: 640px) { .footer-inner { flex-direction: column; gap: 1.25rem; } }
 
-  /* Mobile Responsive adjustments */
   @media (max-width: 768px) {
-    .nav-right { display: none !important; }
-    .nav-mobile-cta { display: inline-block !important; }
-    .footer-inner { flex-direction: column; gap: 1.25rem; }
-  }
-  @media (min-width: 769px) {
-    .nav-mobile-cta { display: none !important; }
-  }
-  .nav-mobile-cta {
-    background: #1A1D1A; color: #F1EBDD;
-    font-family: var(--sans);
-    font-size: .8rem; font-weight: 500;
-    padding: .5rem 1rem;
-    text-decoration: none; display: none;
-  }
-  @media (max-width: 540px) {
-    .nav-right { gap: 1rem; }
-    .nav-cta-hide { display: none; }
-    .nav-menu { min-width: 230px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV COMPONENT -->
+<!-- NAV (shared template) -->
 <nav>
   <div class="wrap">
     <a href="index.html" class="logo"><span class="mark">§</span>Hire Anywhere</a>
@@ -367,15 +262,14 @@
       </div>
       <a href="contact.html" class="cta nav-cta-hide">Start hiring</a>
     </div>
-    <a href="contact.html" class="nav-mobile-cta">Start hiring</a>
   </div>
 </nav>
 
-<!-- HERO LAYOUT -->
+<!-- HERO -->
 <section id="hero">
   <div class="container-narrow">
     <span class="hero-tag">Filipino Professionals — UK Businesses</span>
-    <h1>Find a remote role that actually <em>fits</em></h1>
+    <h1>Find a remote role that actually fits</h1>
     <p class="hero-sub">We work with professionals who are ready for the next stage in their career — not just their next job. Long-term remote roles with UK businesses that value clarity, collaboration, and genuine fit.</p>
     <div class="cta-group">
       <a href="#roles" class="btn-primary">View Open Roles</a>
@@ -384,16 +278,14 @@
   </div>
 </section>
 
-<!-- STRIP COMPONENT -->
+<!-- ORIGIN STRIP -->
 <div id="origin">
-  <div class="container">
-    <div class="origin-inner">
-      A UK-founded recruitment company with on-the-ground experience in Manila — built to bridge the gap between Filipino professionals and UK businesses thoughtfully.
-    </div>
+  <div class="origin-inner">
+    A UK-founded recruitment company with on-the-ground experience in Manila — built to bridge the gap between Filipino professionals and UK businesses thoughtfully.
   </div>
 </div>
 
-<!-- PROBLEM SECTION -->
+<!-- PROBLEM -->
 <section id="problem">
   <div class="container">
     <p class="section-label">01 — The Problem</p>
@@ -429,7 +321,7 @@
   </div>
 </section>
 
-<!-- APPROACH SECTION -->
+<!-- APPROACH -->
 <section id="approach">
   <div class="container">
     <p class="section-label">02 — Our Approach</p>
@@ -468,7 +360,7 @@
   </div>
 </section>
 
-<!-- STAY CONNECTED COMPONENT -->
+<!-- STAY CONNECTED + HOW IT WORKS -->
 <section id="stay">
   <div class="container">
     <div class="stay-inner">
@@ -477,7 +369,7 @@
         <div class="stay-body">
           <p>If nothing here fits right now, you can put yourself forward and we'll keep your profile in mind for future roles that match your experience and goals.</p>
           <p class="stay-employed-note">Already employed? That's fine too. A lot of the people we speak to aren't urgently searching — they're just open to something better when it comes along.</p>
-          <a href="#" class="btn-primary">Be Considered for Future Roles</a>
+          <a href="contact.html" class="btn-primary">Be Considered for Future Roles</a>
         </div>
       </div>
       <div class="stay-how">
@@ -495,7 +387,14 @@
             <span class="stay-step-num">02</span>
             <div>
               <p class="stay-step-title">We keep you informed</p>
-              <p class="stay-step-body">While you wait, we share occasional updates — roles we've placed, what the process looked like, and what UK businesses are currently looking for. Not job alerts.</p>
+              <p class="stay-step-body">While you wait, we share occasional updates — roles we've placed, what the process looked like, and what UK businesses are currently looking for. Not job alerts. Just context.</p>
+            </div>
+          </div>
+          <div class="stay-step">
+            <span class="stay-step-num">03</span>
+            <div>
+              <p class="stay-step-title">We reach out when it's right</p>
+              <p class="stay-step-body">Not everyone will hear from us straight away — and we want to be honest about that. When we do get in touch, it's because something genuinely fits.</p>
             </div>
           </div>
         </div>
@@ -504,7 +403,209 @@
   </div>
 </section>
 
-<!-- SITE FOOTER -->
+<!-- WHAT WE BUILD -->
+<section id="build">
+  <div class="container">
+    <p class="section-label">03 — Who This Is For</p>
+    <h2>What we're trying to build</h2>
+    <p class="build-intro">We're building something that works best for people who are ready for their next chapter — not their next stopgap. That changes who we're the right fit for, and we think it's important to be upfront about that.</p>
+
+    <div class="comparison-grid">
+      <div class="comparison-col col-aligned">
+        <div class="comparison-col-title">A good fit if you are</div>
+        <ul>
+          <li>Currently employed and thinking about what's next — not urgently job hunting</li>
+          <li>Looking for one long-term role with a single employer, not multiple clients</li>
+          <li>Ready for a genuine next step in your career, not just a change of scenery</li>
+          <li>Someone who values stability, collaboration, and being part of a team</li>
+          <li>Open to a process that takes time to get right</li>
+        </ul>
+      </div>
+      <div class="comparison-col col-notfit">
+        <div class="comparison-col-title">Probably not the right fit if you are</div>
+        <ul>
+          <li>Looking for a role to start within the next week or two</li>
+          <li>Currently managing multiple clients and prefer to keep it that way</li>
+          <li>Interested in freelance, project-based, or short-term work</li>
+          <li>Applying to many different companies at once without a clear direction</li>
+          <li>Primarily focused on short-term income rather than long-term fit</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="closing-line">There's nothing wrong with different ways of working — this is simply the type of hiring environment we're focused on building.</p>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container-mid">
+    <p class="section-label">04 — The Process</p>
+    <h2>What the process usually looks like</h2>
+
+    <div class="process-steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <div class="step-content">
+          <h3>Application or direct outreach</h3>
+          <p>You apply for a specific role — or, if you're already in our pipeline, we may reach out directly when a relevant opportunity comes up. We look at both directions: candidates who come to us, and candidates we already know whose background fits a new role.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <div class="step-content">
+          <h3>Initial review</h3>
+          <p>We review your background and overall fit for the role or the types of roles we work on before deciding whether to move forward.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <div class="step-content">
+          <h3>Screening and reference checks</h3>
+          <p>We have a proper conversation to understand your experience, working style, long-term goals, and the kind of environment you do your best work in. Reference checks happen alongside this for candidates we're taking forward.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">04</span>
+        <div class="step-content">
+          <h3>Shortlisting and client introductions</h3>
+          <p>If there's strong alignment, we shortlist you and introduce you to the client — giving you proper context on the business and what to expect going into the interview.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">05</span>
+        <div class="step-content">
+          <h3>Offer and onboarding support</h3>
+          <p>We stay involved through the offer stage and early onboarding to help both sides get off to a good start.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="process-note">Not every candidate will move through the process immediately — and that's okay. Sometimes the best-fit opportunities take time to align properly.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container-mid">
+    <p class="section-label">From Candidates We've Spoken To</p>
+    <h2>In their own words</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"What stood out was how much context I was given before the interview. I actually understood the role and the team before I even spoke to the client."</p>
+        <p class="testimonial-attr">— Placed candidate, operations role</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"I wasn't actively looking, but the opportunity made sense — and the process was straightforward and respectful throughout."</p>
+        <p class="testimonial-attr">— Placed candidate, remote role with a UK business</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"For the first time, I felt like I was being matched — not just sent somewhere and hoped for the best."</p>
+        <p class="testimonial-attr">— Candidate, currently placed</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container-mid">
+    <p class="section-label">05 — Common Questions</p>
+    <h2>Frequently asked questions</h2>
+
+    <div class="faq-list">
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="faq-q-text">Who is Hire Anywhere, and what do you actually do?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>We're a UK-founded recruitment company that connects Filipino professionals with UK businesses looking for long-term remote hires.</p>
+          <p>We work with a smaller number of roles at a time and focus on making proper introductions — ones where both sides have been understood, aligned, and prepared before the first interview. Our team operates in Manila, which means we have real context on both sides of a remote working relationship.</p>
+          <p>We don't charge candidates anything. Our fees are paid by the businesses we work with.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="faq-q-text">How are you different from other recruitment agencies or job platforms?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Our focus is on fit rather than speed. We take time to understand candidates — their experience, working style, and what they're genuinely looking for — before making any introduction. We do the same on the business side, which means by the time both parties meet, there's already a strong foundation.</p>
+          <p>We also work with a focused number of roles at a time, which lets us give each placement the attention it deserves. We'd rather do fewer things well than move fast and get it wrong.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="faq-q-text">Can I apply even if I'm not actively job searching?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Yes — wherever you are right now is fine. Some people come to us actively looking for a new role. Others are settled in their current job but open to something better if the right opportunity comes along. Both are welcome.</p>
+          <p>What matters more than your current situation is whether you're looking for something long-term and are open to a process that takes the time to get it right.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="faq-q-text">What happens if there isn't a suitable role right now?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>You can still be considered for future roles. Rather than leaving things open-ended, you can put yourself forward and we'll keep your profile in mind as new opportunities come in.</p>
+          <p>If something comes up that genuinely fits — in terms of your experience, your goals, and your working style — we'll be in touch. We won't reach out just to fill a gap.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="faq-q-text">Will I just submit my details and never hear back?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>We understand why that concern exists — it's a common experience with platforms that collect CVs at scale. We try to work differently.</p>
+          <p>We're honest that not everyone will hear back immediately, especially if there isn't a clear fit at that moment. But we do keep a considered group of candidates on file, and when something relevant comes up, we reach out. We'll also share occasional updates in the meantime — things like roles we've placed and context on what UK businesses are looking for — so you're not left in the dark.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="faq-q-text">What types of roles do you work on?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>We work across a range of functions — including operations, marketing, finance, administration, and more. The roles vary, but the common thread is that they're long-term, remote positions where the candidate becomes a genuine part of a UK business or team.</p>
+          <p>Most are full-time, though we occasionally work on strong part-time placements too. If you're unsure whether your background fits, it's always worth putting yourself forward — we'll let you know if there's potential alignment.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span class="faq-q-text">What are the usual setup requirements for remote roles?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>Requirements vary depending on the role, but most positions require:</p>
+          <ul>
+            <li>A reliable computer or laptop</li>
+            <li>A stable internet connection</li>
+            <li>Clear audio for calls and meetings</li>
+            <li>A professional and reasonably quiet working environment</li>
+            <li>A webcam for interviews and regular team calls</li>
+            <li>Availability during UK business hours, or the agreed overlap window</li>
+          </ul>
+          <p style="margin-top: 0.75rem;">Any role-specific requirements will always be discussed clearly before you move forward.</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER (shared template) -->
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand">
@@ -515,6 +616,7 @@
       <a href="index.html">Home</a>
       <a href="success-stories.html">Success stories</a>
       <a href="salary-guide.html">Salary guide</a>
+      <a href="careers.html">Careers</a>
       <a href="contact.html">Contact us</a>
       <a href="partners.html">Partner with us</a>
     </nav>
@@ -525,7 +627,6 @@
   </div>
 </footer>
 
-<!-- Functional Navigation Interaction Dropdown Script -->
 <script>
 (function(){
   var t=document.querySelector('.nav-trigger'),d=document.querySelector('.nav-dropdown');
@@ -535,6 +636,5 @@
   }
 })();
 </script>
-
 </body>
 </html>
