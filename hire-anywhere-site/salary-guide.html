@@ -85,31 +85,8 @@
   .nav-link:hover { color: var(--ink); }
 
   /* Dropdown */
-  .nav-dropdown { position: relative; }
-  .nav-trigger {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
-    margin: 0;
-    height: auto;
-    min-height: 0;
-    box-sizing: content-box;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    vertical-align: middle;
-    gap: 0.45rem;
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    line-height: 1;
-  }
+  .nav-dropdown { position: relative; display: inline-flex; align-items: center; }
+  .nav-trigger { cursor: pointer; }
   .nav-trigger .nav-chev {
     font-size: 9px;
     color: var(--ink-mute);
@@ -459,11 +436,12 @@
   h2 em { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; color: var(--accent); }
 
   /* ---------- Next step ---------- */
-  .next-step { text-align: center; padding: clamp(4rem, 9vw, 6rem) 0; border-top: 1px solid var(--rule); }
-  .next-step .eyebrow { justify-content: center; }
-  .next-step h2 { margin: 0 auto 2rem; max-width: 24ch; text-align: center; font-size: clamp(1.7rem, 3.2vw, 2.3rem); }
-  .next-reassure { font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); margin-top: 1.1rem; }
-  .next-reassure em { font-style: normal; color: var(--accent); }
+  .next-step { background: #15171A; color: var(--paper); text-align: center; padding: clamp(4.5rem, 10vw, 7rem) 0; border-top: none; }
+  .next-step .eyebrow { justify-content: center; color: rgba(241, 235, 221, 0.55); }
+  .next-step .eyebrow::before, .next-step .eyebrow::after { background: rgba(241, 235, 221, 0.35); }
+  .next-step h2 { margin: 0 auto 2rem; max-width: 22ch; text-align: center; font-size: clamp(2rem, 4.5vw, 3.4rem); line-height: 1.05; color: var(--paper); }
+  .next-reassure { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 36, "SOFT" 30; font-style: italic; font-weight: 400; font-size: 0.95rem; letter-spacing: -0.005em; color: rgba(241, 235, 221, 0.65); margin-top: 1.5rem; text-align: center; }
+  .next-reassure em { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; color: var(--accent); font-weight: 500; }
 
   /* ---------- Footer ---------- */
   footer.site-footer { background: var(--ink) !important; color: #C9BFA8 !important; padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem) !important; border-top: none; }
@@ -488,10 +466,9 @@
     <div class="nav-right">
       <a href="success-stories.html" class="nav-link">Success stories</a>
       <div class="nav-dropdown">
-        <button type="button" class="nav-link nav-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
-          Guides
-          <span class="nav-chev" aria-hidden="true">▾</span>
-        </button>
+        <span class="nav-link nav-trigger" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
+          Guides <span class="nav-chev" aria-hidden="true">▾</span>
+        </span>
         <div class="nav-menu" id="guides-menu" role="menu">
           <a href="salary-guide.html" class="nav-menu-item is-active" role="menuitem">
             <span class="nav-menu-title">Salary Guide</span>
@@ -499,7 +476,7 @@
           </a>
         </div>
       </div>
-      <a href="contact.html" class="cta nav-cta-hide">Start hiring</a>
+      <a href="start-hiring.html" class="cta nav-cta-hide">Start hiring</a>
     </div>
   </div>
 </nav>
@@ -541,7 +518,9 @@
       <div class="form-card">
         <div class="form-eyebrow">Download — Free, PDF</div>
 
-        <form id="guideForm" novalidate>
+        <form id="guideForm" name="salary-guide" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="salary-guide" />
+          <p style="display:none"><label>Don't fill this out: <input name="bot-field" /></label></p>
           <h2>Sent straight to <em>your inbox.</em></h2>
 
           <div class="field" data-field="name">
@@ -578,7 +557,7 @@
   <div class="wrap">
     <div class="eyebrow">Already read the figures?</div>
     <h2>The hire you've been putting off <em>— at a price that finally makes sense.</em></h2>
-    <a href="contact.html" class="cta accent">Start hiring &nbsp;→</a>
+    <a href="start-hiring.html" class="cta accent">Start hiring &nbsp;→</a>
     <p class="next-reassure"><em>Zero risk.</em> Only pay when you hire.</p>
   </div>
 </section>
@@ -615,6 +594,7 @@
     function close() { dropdown.classList.remove('is-open'); trigger.setAttribute('aria-expanded', 'false'); }
     function toggle() { dropdown.classList.contains('is-open') ? close() : open(); }
     trigger.addEventListener('click', e => { e.stopPropagation(); toggle(); });
+    trigger.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
     document.addEventListener('click', e => { if (!dropdown.contains(e.target)) close(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
     menu.querySelectorAll('.nav-menu-item').forEach(item => item.addEventListener('click', close));
@@ -628,6 +608,9 @@
   };
   function clearError(fieldEl) { fieldEl.classList.remove('has-error'); }
   function showError(fieldEl) { fieldEl.classList.add('has-error'); }
+  function encodeForm(data) {
+    return Object.keys(data).map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k])).join('&');
+  }
   form.addEventListener('input', e => { const fieldEl = e.target.closest('.field'); if (fieldEl) clearError(fieldEl); });
   form.addEventListener('submit', e => {
     e.preventDefault();
@@ -639,9 +622,25 @@
       if (!valid) { showError(fieldEl); if (!firstInvalid) firstInvalid = input; } else { clearError(fieldEl); }
     });
     if (firstInvalid) { firstInvalid.focus(); return; }
-    form.classList.add('is-hidden');
-    successEl.classList.add('is-visible');
-    document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    const formData = new FormData(form);
+    const payload = {};
+    formData.forEach((v, k) => { payload[k] = v; });
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encodeForm(payload),
+    })
+      .then(() => {
+        form.classList.add('is-hidden');
+        successEl.classList.add('is-visible');
+        document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      })
+      .catch(() => {
+        submitBtn.disabled = false;
+        alert('Something went wrong sending your request. Please try again or email us directly.');
+      });
   });
 </script>
 </body>
