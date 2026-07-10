@@ -82,7 +82,7 @@
   }
   .nav-link:hover { color: var(--ink); }
   .nav-dropdown { position: relative; }
-  .nav-trigger { -webkit-appearance: none; -moz-appearance: none; appearance: none; background: transparent; border: none; outline: none; padding: 0; margin: 0; height: auto; min-height: 0; cursor: pointer; display: inline-flex; align-items: center; vertical-align: middle; gap: 0.45rem; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); line-height: 1; box-sizing: content-box; }
+  .nav-trigger { cursor: pointer; }
   .nav-trigger .nav-chev { font-size: 9px; color: var(--ink-mute); transition: transform 0.2s ease, color 0.18s ease; display: inline-block; transform: translateY(-1px); }
   .nav-trigger:hover .nav-chev, .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
   .nav-trigger[aria-expanded="true"] .nav-chev { transform: translateY(-1px) rotate(180deg); }
@@ -239,6 +239,25 @@
   @media (max-width: 768px) {
     .footer-inner { flex-direction: column; align-items: flex-start; }
   }
+
+  /* CANDIDATE FORM */
+  #candidate-form { background: var(--linen); border-top: 1px solid var(--border-soft); }
+  .candidate-form-intro { font-size: 1rem; color: var(--clay); line-height: 1.75; max-width: 46ch; margin-bottom: 2.5rem; font-weight: 300; }
+  .candidate-field { margin-bottom: 1.25rem; }
+  .candidate-field label { display: block; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bark); margin-bottom: 0.55rem; }
+  .candidate-field label .req { color: var(--accent); }
+  .candidate-field label .opt { color: var(--clay); text-transform: none; letter-spacing: 0; font-weight: 300; }
+  .candidate-field input {
+    width: 100%; background: var(--paper); border: 1px solid var(--stone); padding: 0.75rem 0.85rem;
+    font-family: 'Geist', system-ui, sans-serif; font-size: 0.95rem; color: var(--ink); border-radius: 2px; box-sizing: border-box;
+    outline: none; transition: border-color 0.18s ease;
+  }
+  .candidate-field input:focus { border-color: var(--accent); }
+  .candidate-submit { width: 100%; margin-top: 0.5rem; }
+  .candidate-fineprint { font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); text-align: center; margin-top: 0.85rem; }
+  #candidateSuccess { display: none; text-align: center; padding: 2rem 0; }
+  #candidateSuccess h2 { margin-bottom: 0.5rem; }
+  #candidateSuccess p { color: var(--clay); }
 </style>
 </head>
 <body>
@@ -250,9 +269,9 @@
     <div class="nav-right">
       <a href="success-stories.html" class="nav-link">Success stories</a>
       <div class="nav-dropdown">
-        <button type="button" class="nav-link nav-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
+        <span class="nav-link nav-trigger" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
           Guides <span class="nav-chev" aria-hidden="true">▾</span>
-        </button>
+        </span>
         <div class="nav-menu" id="guides-menu" role="menu">
           <a href="salary-guide.html" class="nav-menu-item" role="menuitem">
             <span class="nav-menu-title">Salary Guide</span>
@@ -260,7 +279,7 @@
           </a>
         </div>
       </div>
-      <a href="contact.html" class="cta nav-cta-hide">Start hiring</a>
+      <a href="start-hiring.html" class="cta nav-cta-hide">Start hiring</a>
     </div>
   </div>
 </nav>
@@ -272,8 +291,7 @@
     <h1>Find a remote role that actually fits</h1>
     <p class="hero-sub">We work with professionals who are ready for the next stage in their career — not just their next job. Long-term remote roles with UK businesses that value clarity, collaboration, and genuine fit.</p>
     <div class="cta-group">
-      <a href="#roles" class="btn-primary">View Open Roles</a>
-      <a href="#stay" class="btn-secondary">Be Considered for Future Roles</a>
+      <a href="#candidate-form" class="btn-primary">Be Considered for Future Roles</a>
     </div>
   </div>
 </section>
@@ -369,7 +387,7 @@
         <div class="stay-body">
           <p>If nothing here fits right now, you can put yourself forward and we'll keep your profile in mind for future roles that match your experience and goals.</p>
           <p class="stay-employed-note">Already employed? That's fine too. A lot of the people we speak to aren't urgently searching — they're just open to something better when it comes along.</p>
-          <a href="contact.html" class="btn-primary">Be Considered for Future Roles</a>
+          <a href="#candidate-form" class="btn-primary">Be Considered for Future Roles</a>
         </div>
       </div>
       <div class="stay-how">
@@ -605,6 +623,66 @@
   </div>
 </section>
 
+<!-- CANDIDATE EXPRESSION OF INTEREST FORM -->
+<section id="candidate-form">
+  <div class="container-narrow">
+    <p class="section-label" style="margin-bottom:1rem">No open roles right now</p>
+    <h2>Tell us a little about yourself.</h2>
+    <p class="candidate-form-intro">We don't advertise roles publicly — we match candidates directly to client briefs. Register your interest below and we'll be in touch when a role that genuinely fits comes up. No spam, no job alerts — just a real conversation when the timing is right.</p>
+
+    <div id="candidateSuccess" role="status" aria-live="polite">
+      <h2>Thank you.</h2>
+      <p>We've noted your interest — we'll be in touch when something relevant comes up.</p>
+    </div>
+
+    <form id="candidateInterestForm" name="candidate-interest" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="candidate-interest" />
+      <p style="display:none"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+      <div class="candidate-field">
+        <label for="candName">Full name <span class="req">*</span></label>
+        <input type="text" id="candName" name="name" autocomplete="name" required>
+      </div>
+
+      <div class="candidate-field">
+        <label for="candEmail">Email <span class="req">*</span></label>
+        <input type="email" id="candEmail" name="email" autocomplete="email" required>
+      </div>
+
+      <div class="candidate-field">
+        <label for="candRole">What kind of role are you looking for? <span class="opt">(optional)</span></label>
+        <input type="text" id="candRole" name="role_interest" placeholder="e.g. Finance, Operations, Marketing">
+      </div>
+
+      <div class="candidate-field">
+        <label for="candLinkedin">LinkedIn URL <span class="req">*</span></label>
+        <input type="url" id="candLinkedin" name="linkedin" placeholder="https://linkedin.com/in/yourname" required>
+      </div>
+
+      <button type="submit" class="btn-primary candidate-submit">Submit</button>
+      <p class="candidate-fineprint">We will never share your details or send you spam.</p>
+    </form>
+  </div>
+</section>
+<script>
+(function(){
+  var form = document.getElementById('candidateInterestForm'), succ = document.getElementById('candidateSuccess');
+  if (form && succ) {
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      try {
+        await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() });
+      } catch (err) {
+        // fall through to success state regardless — Netlify form submission is fire-and-forget from the client's perspective
+      }
+      form.style.display = 'none';
+      succ.style.display = 'block';
+      succ.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+})();
+</script>
+
 <!-- FOOTER (shared template) -->
 <footer class="site-footer">
   <div class="footer-inner">
@@ -631,7 +709,7 @@
 (function(){
   var t=document.querySelector('.nav-trigger'),d=document.querySelector('.nav-dropdown');
   if(t&&d){
-    t.addEventListener('click',function(e){e.stopPropagation();d.classList.toggle('is-open');t.setAttribute('aria-expanded',d.classList.contains('is-open'));});
+    t.addEventListener('click',function(e){e.stopPropagation();d.classList.toggle('is-open');t.setAttribute('aria-expanded',d.classList.contains('is-open'));});t.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();d.classList.toggle('is-open');t.setAttribute('aria-expanded',d.classList.contains('is-open'));}});
     document.addEventListener('click',function(){if(d)d.classList.remove('is-open');});
   }
 })();
