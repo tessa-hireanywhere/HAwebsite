@@ -57,8 +57,8 @@
   }
   .nav-link:hover { color: var(--ink); }
 
-  .nav-dropdown { position: relative; }
-  .nav-trigger { -webkit-appearance: none; -moz-appearance: none; appearance: none; background: transparent; border: none; outline: none; padding: 0; margin: 0; height: auto; min-height: 0; cursor: pointer; display: inline-flex; align-items: center; vertical-align: middle; gap: 0.45rem; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); line-height: 1; box-sizing: content-box; }
+  .nav-dropdown { position: relative; display: inline-flex; align-items: center; }
+  .nav-trigger { cursor: pointer; }
   .nav-trigger .nav-chev { font-size: 9px; color: var(--ink-mute); transition: transform 0.2s ease, color 0.18s ease; display: inline-block; transform: translateY(-1px); }
   .nav-trigger:hover .nav-chev, .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
   .nav-trigger[aria-expanded="true"] .nav-chev { transform: translateY(-1px) rotate(180deg); }
@@ -177,7 +177,7 @@
   .cta-block:hover { background: var(--accent-deep); border-color: var(--accent-deep); gap: 1rem; }
   .cta-block .arrow { display: inline-block; transition: transform 0.2s ease; }
   .cta-block:hover .arrow { transform: translateX(3px); }
-  .next-reassure { color: rgba(241, 235, 221, 0.65); margin-top: 1.5rem; text-align: center; font-size: 0.95rem; }
+  .next-reassure { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 36, "SOFT" 30; font-style: italic; font-weight: 400; font-size: 0.95rem; letter-spacing: -0.005em; color: rgba(241, 235, 221, 0.65); margin-top: 1.5rem; text-align: center; }
   .next-reassure em { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; color: var(--accent); font-weight: 500; }
 
   /* ---------- Footer ---------- */
@@ -203,10 +203,9 @@
     <div class="nav-right">
       <a href="success-stories.html" class="nav-link">Success stories</a>
       <div class="nav-dropdown">
-        <button type="button" class="nav-link nav-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
-          Guides
-          <span class="nav-chev" aria-hidden="true">▾</span>
-        </button>
+        <span class="nav-link nav-trigger" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
+          Guides <span class="nav-chev" aria-hidden="true">▾</span>
+        </span>
         <div class="nav-menu" id="guides-menu" role="menu">
           <a href="salary-guide.html" class="nav-menu-item" role="menuitem">
             <span class="nav-menu-title">Salary Guide</span>
@@ -214,7 +213,7 @@
           </a>
         </div>
       </div>
-      <a href="contact.html" class="cta nav-cta-hide">Start hiring</a>
+      <a href="start-hiring.html" class="cta nav-cta-hide">Start hiring</a>
     </div>
   </div>
 </nav>
@@ -286,7 +285,7 @@
         </div>
       </div>
 
-      <a href="stories/soho-agency-video-editor.html" class="story" data-cat="creative">
+      <a href="soho-agency-video-editor.html" class="story" data-cat="creative">
         <div class="story-industry">Independent Agency</div>
         <p class="story-role">Hired a <strong>Senior Video Editor</strong> with seven years on UK and Australian agency briefs.</p>
         <div class="story-salary">£1,400<span class="per">/ month</span></div>
@@ -363,7 +362,7 @@
     <h2 class="next-h2">
       The hire you've been putting off <em>— at a price that finally makes sense.</em>
     </h2>
-    <a href="contact.html" class="cta-block">
+    <a href="start-hiring.html" class="cta-block">
       Start Hiring <span class="arrow">→</span>
     </a>
     <p class="next-reassure"><em>Zero risk.</em> Only pay when you hire.</p>
@@ -402,6 +401,7 @@
     function close() { dropdown.classList.remove('is-open'); trigger.setAttribute('aria-expanded', 'false'); }
     function toggle() { dropdown.classList.contains('is-open') ? close() : open(); }
     trigger.addEventListener('click', e => { e.stopPropagation(); toggle(); });
+    trigger.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
     document.addEventListener('click', e => { if (!dropdown.contains(e.target)) close(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
     menu.querySelectorAll('.nav-menu-item').forEach(item => item.addEventListener('click', close));
