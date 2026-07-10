@@ -69,7 +69,7 @@
   }
   .nav-link:hover { color: var(--ink); }
   .nav-dropdown { position: relative; }
-  .nav-trigger { -webkit-appearance: none; -moz-appearance: none; appearance: none; background: transparent; border: none; outline: none; padding: 0; margin: 0; height: auto; min-height: 0; cursor: pointer; display: inline-flex; align-items: center; vertical-align: middle; gap: 0.45rem; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); line-height: 1; box-sizing: content-box; }
+  .nav-trigger { cursor: pointer; }
   .nav-trigger .nav-chev { font-size: 9px; color: var(--ink-mute); transition: transform 0.2s ease, color 0.18s ease; display: inline-block; transform: translateY(-1px); }
   .nav-trigger:hover .nav-chev, .nav-trigger[aria-expanded="true"] .nav-chev { color: var(--accent); }
   .nav-trigger[aria-expanded="true"] .nav-chev { transform: translateY(-1px) rotate(180deg); }
@@ -307,7 +307,7 @@
   .cta-block .arrow { display: inline-block; transition: transform 0.2s ease; }
   .cta-block:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
   .cta-block:hover .arrow { transform: translateX(4px); }
-  .next-reassure { color: rgba(241, 235, 221, 0.65); margin-top: 1.5rem; text-align: center; }
+  .next-reassure { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 36, "SOFT" 30; font-style: italic; font-weight: 400; font-size: 0.95rem; letter-spacing: -0.005em; color: rgba(241, 235, 221, 0.65); margin-top: 1.5rem; text-align: center; }
   .next-reassure em { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; color: var(--accent); font-weight: 500; }
 
   /* ---------- Footer ---------- */
@@ -332,9 +332,9 @@
     <div class="nav-right">
       <a href="success-stories.html" class="nav-link">Success stories</a>
       <div class="nav-dropdown">
-        <button type="button" class="nav-link nav-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
+        <span class="nav-link nav-trigger" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true" aria-controls="guides-menu">
           Guides <span class="nav-chev" aria-hidden="true">▾</span>
-        </button>
+        </span>
         <div class="nav-menu" id="guides-menu" role="menu">
           <a href="salary-guide.html" class="nav-menu-item" role="menuitem">
             <span class="nav-menu-title">Salary Guide</span>
@@ -342,7 +342,7 @@
           </a>
         </div>
       </div>
-      <a href="contact.html" class="cta nav-cta-hide">Start hiring</a>
+      <a href="start-hiring.html" class="cta nav-cta-hide">Start hiring</a>
     </div>
   </div>
 </nav>
@@ -356,7 +356,7 @@
       <p class="hero-lead">We headhunt brilliant overseas talent for your business — fully vetted, UK working hours, a third of the cost. If they don't click in six months, we replace them, free.</p>
       <div class="hero-actions">
         <div class="hero-cta-primary">
-          <a href="contact.html" class="cta">Start hiring</a>
+          <a href="start-hiring.html" class="cta">Start hiring</a>
           <p class="hero-reassure">Only pay when you hire.</p>
         </div>
         <a href="#how" class="cta outline">How it works</a>
@@ -598,8 +598,8 @@
   <div class="wrap">
     <div class="eyebrow next-eyebrow">Next step</div>
     <h2 class="next-h2">The hire you've been putting off <em>— at a price that finally makes sense.</em></h2>
-    <a href="contact.html" class="cta-block">Start Hiring <span class="arrow">→</span></a>
-    <p class="hero-reassure next-reassure"><em>Zero risk.</em> Only pay when you hire.</p>
+    <a href="start-hiring.html" class="cta-block">Start Hiring <span class="arrow">→</span></a>
+    <p class="next-reassure"><em>Zero risk.</em> Only pay when you hire.</p>
   </div>
 </section>
 
@@ -633,6 +633,13 @@
       e.stopPropagation();
       d.classList.toggle('is-open');
       t.setAttribute('aria-expanded',d.classList.contains('is-open'));
+    });
+    t.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){
+        e.preventDefault();
+        d.classList.toggle('is-open');
+        t.setAttribute('aria-expanded',d.classList.contains('is-open'));
+      }
     });
     document.addEventListener('click',function(){if(d)d.classList.remove('is-open');});
   }
